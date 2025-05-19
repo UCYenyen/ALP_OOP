@@ -1,3 +1,4 @@
-public class person {
+package model;
+public class Person {
 
 }

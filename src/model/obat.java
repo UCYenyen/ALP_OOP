@@ -1,3 +1,4 @@
-public class obat {
+package model;
+public class Obat {
 
 }

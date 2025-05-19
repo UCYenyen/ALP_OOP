@@ -1,3 +1,4 @@
-public class sickPerson {
+package model;
+public class SickPerson {
 
 }
