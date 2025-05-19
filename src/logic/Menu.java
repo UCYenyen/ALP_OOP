@@ -9,6 +9,8 @@ public class Menu {
 
     private LinkedList<Person> people = new LinkedList<>();
     private Person currentPerson;
+
+    private int currentHour = 6;
     public Menu(){
         randomPerson();
         defaultMenu();
@@ -147,7 +149,7 @@ public class Menu {
                 }
                 break;
             case 3:
-                
+                buyItems();
                 return;
         }
     }
@@ -156,10 +158,31 @@ public class Menu {
     //#region activities
 
     private void doActivities(){
-        System.out.println("Activities Menu");
-        System.out.println("1. Physical Activity");
-        System.out.println("2. Mental Activity");
-        System.out.println("3. Spiritual Activity");
+        int choice = 0;
+        do{
+            System.out.println("Activities Menu");
+            System.out.println("1. Physical Activity");
+            System.out.println("2. Mental Activity");
+            System.out.println("3. Spiritual Activity");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            System.out.println();
+            if(choice < 1 || choice > 3){
+                System.out.println("Invalid choice");
+            }
+        }while(choice < 1 || choice > 3);
+        switch (choice) {
+            case 1:
+                PhysicalActivity();
+                break;
+            case 2:
+                // System.out.println("Mental Activity");
+                break;
+            case 3:
+                // System.out.println("Spiritual Activity");
+                break;
+        }
+
     }
     private void createActivity(){
         System.out.println("Create Activity Menu");
@@ -172,6 +195,8 @@ public class Menu {
         System.out.println("1. Exercise");
         System.out.println("2. Eat");
         System.out.println("3. Sleep");
+        
+        incrementHour();
     }
     //#endregion
     private void buyItems(){
@@ -179,5 +204,14 @@ public class Menu {
         System.out.println("1. Food");
         System.out.println("2. Drink");
         System.out.println("3. Medicine");
+
+        incrementHour();
+    }
+
+    private void incrementHour(){
+        currentHour++;
+        if(currentHour >= 24){
+            currentHour = 1;
+        }
     }
 }
