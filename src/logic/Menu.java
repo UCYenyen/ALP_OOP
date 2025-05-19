@@ -1,6 +1,5 @@
 package logic;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import model.*;
 
@@ -114,7 +113,7 @@ public class Menu {
             System.out.println((i+1) + ". " + items.get(i).getName());
         }
         System.out.println();
-        
+
         System.out.println("=== Medicines ===");
         for(int i = 0; i < foods.size(); i++){
             System.out.println((i+1) + ". " + foods.get(i).getName());
