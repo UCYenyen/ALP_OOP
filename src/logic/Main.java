@@ -2,6 +2,6 @@ package logic;
 
 public class Main {
     public static void main(String[] args) {
-        App app = new App();
+        Menu menu = new Menu();
     }
 }
