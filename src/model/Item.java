@@ -1,13 +1,13 @@
 package model;
 
 public abstract class Item {
-    private String name;
-    private double price;
-    private double physicalEffect;
-    private double mentalEffect;
-    private double spiritualEffect;
+    protected String name;
+    protected double price;
+    protected int physicalEffect;
+    protected int mentalEffect;
+    protected int spiritualEffect;
 
-    public Item(String name, double price, double physicalEffect, double mentalEffect, double spiritualEffect) {
+    public Item(String name, double price, int physicalEffect, int mentalEffect, int spiritualEffect) {
         this.name = name;
         this.price = price;
         this.physicalEffect = physicalEffect;
@@ -16,6 +16,7 @@ public abstract class Item {
     }
 
     public abstract void use(Person person);
+
     public void sellItem(Person person){
         person.setMoney(person.getMoney() + price);
         person.getInventory().remove(this);
@@ -26,39 +27,39 @@ public abstract class Item {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public double getPhysicalEffect() {
-        return physicalEffect;
-    }
-
-    public double getMentalEffect() {
-        return mentalEffect;
-    }
-
-    public double getSpiritualEffect() {
-        return spiritualEffect;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setPhysicalEffect(double physicalEffect) {
+    public int getPhysicalEffect() {
+        return physicalEffect;
+    }
+
+    public void setPhysicalEffect(int physicalEffect) {
         this.physicalEffect = physicalEffect;
     }
 
-    public void setMentalEffect(double mentalEffect) {
+    public int getMentalEffect() {
+        return mentalEffect;
+    }
+
+    public void setMentalEffect(int mentalEffect) {
         this.mentalEffect = mentalEffect;
     }
 
-    public void setSpiritualEffect(double spiritualEffect) {
+    public int getSpiritualEffect() {
+        return spiritualEffect;
+    }
+
+    public void setSpiritualEffect(int spiritualEffect) {
         this.spiritualEffect = spiritualEffect;
     }
     

@@ -19,9 +19,6 @@ public class Places {
         this.closeHour = r.nextInt(20, 24);
         this.itemsToSell = itemsToSell;
 
-        System.out.println("buka memek" + openHour);
-        System.out.println("tutup memek" + closeHour);
-
         isOpen = currentHour <= closeHour && currentHour >= openHour;
     }
     public boolean checkIfIsOpen(int currentHour){

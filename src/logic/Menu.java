@@ -11,29 +11,33 @@ public class Menu {
     private Person currentPerson;
 
     private int currentHour = 6;
+
     public Menu(){
-        randomPerson();
+        initializePerson();
         defaultMenu();
     }
 
-    private void randomPerson(){
-        people.clear();
-        String[] names = {"John", "Jane", "Bob", "Alice", "Tom", "Jerry", "Mickey", "Donald", "Goofy", "Pluto"};
+    private void initializePerson(){
+        String[] healthyPersonNames = {"Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma", "Felix"};
         for(int i = 0; i < 10; i++){
-            String name = names[i];
-            double money = r.nextInt(1000);
-            double physicalHealth = r.nextInt(100);
-            double mentalHealth = r.nextInt(100);
-            double spiritualHealth = r.nextInt(100);
-            Person p = new Person(name, money, physicalHealth, mentalHealth, spiritualHealth);
+            String name = healthyPersonNames[i];
+            Person p = new Person(name);
             people.add(p);
         }
-        currentPerson = people.get(r.nextInt(people.size()));
+        String[] sickPersonNames = {"Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon", "Christoper", "Christian"};
+        String [] illness_list = {"Diabetes", "Hypertension", "Asthma", "Arthritis", "Influenza", "GERD", "Pneumonia", "Depression", "Anxiety Disorder", "Bipolar Disorder"};
+        for(int i = 0; i < 10; i++){
+            String name = sickPersonNames[i];
+            String illness = illness_list[i];
+            SickPerson p = new SickPerson(name, illness);
+            people.add(p);
+        }
     }
+
 
     private void defaultMenu(){
         int choice = 0;
-        
+
         do{
             System.out.println("Welcome to Game");
             System.out.println("1. Play Game");
@@ -44,7 +48,7 @@ public class Menu {
             if(choice < 1 || choice > 2){
                 System.out.println("Invalid choice");
             }
-        }while(choice < 1 || choice > 2);
+        } while(choice < 1 || choice > 2);
 
         switch (choice) {
             case 1:
@@ -58,6 +62,7 @@ public class Menu {
     }
 
     private void mainMenu(){
+        currentPerson = people.get(r.nextInt(people.size()));
         while (true) {
             int choice = 0; 
             do{
@@ -72,7 +77,7 @@ public class Menu {
                 if(choice < 1 || choice > 4){
                     System.out.println("Invalid choice");
                 }
-            }while(choice < 1 || choice > 4);
+            } while(choice < 1 || choice > 4);
             
             switch (choice) {
                 case 1:
@@ -91,12 +96,12 @@ public class Menu {
     }
     //#region inventory
     private void showInventory() {
-        LinkedList<Item> items = new LinkedList<>();
+        LinkedList<Item> medicines = new LinkedList<>();
         LinkedList<Item> foods = new LinkedList<>(); 
 
         System.out.println("== " + currentPerson.getName() +" Inventory ==");
 
-        if(items.isEmpty() && foods.isEmpty()){
+        if(medicines.isEmpty() && foods.isEmpty()){
             System.out.println("Inventory is empty");
             System.out.println();
             return;
@@ -104,21 +109,21 @@ public class Menu {
 
         for(int i = 0; i < currentPerson.getInventory().size(); i++){
             if(currentPerson.getInventory().get(i) instanceof Food){
-                items.add(currentPerson.getInventory().get(i));
-            }else if(currentPerson.getInventory().get(i) instanceof Medicine){
                 foods.add(currentPerson.getInventory().get(i));
+            } else if(currentPerson.getInventory().get(i) instanceof Medicine){
+                medicines.add(currentPerson.getInventory().get(i));
             }
         }
 
         System.out.println("=== Foods ===");
-        for(int i = 0; i < items.size(); i++){
-            System.out.println((i+1) + ". " + items.get(i).getName());
+        for(int i = 0; i < foods.size(); i++){
+            System.out.println((i+1) + ". " + foods.get(i).getName());
         }
         System.out.println();
 
         System.out.println("=== Medicines ===");
-        for(int i = 0; i < foods.size(); i++){
-            System.out.println((i+1) + ". " + foods.get(i).getName());
+        for(int i = 0; i < medicines.size(); i++){
+            System.out.println((i+1) + ". " + medicines.get(i).getName());
         }
         
         System.out.println("1. Use Item");
@@ -132,20 +137,20 @@ public class Menu {
                 System.out.println("Use Item");
                 System.out.print("Enter item number : ");
                 int itemNumber = s.nextInt();
-                if(itemNumber > items.size()){
+                if(itemNumber > medicines.size()){
                     System.out.println("Item not found");
-                }else{
-                    items.get(itemNumber-1).use(currentPerson);
+                } else{
+                    medicines.get(itemNumber-1).use(currentPerson);
                 }
                 break;
             case 2:
                 System.out.println("Sell Item");
                 System.out.print("Enter item number : ");
                 int sellItemNumber = s.nextInt();
-                if(sellItemNumber > items.size()){
+                if(sellItemNumber > medicines.size()){
                     System.out.println("Item not found");
-                }else{
-                    items.get(sellItemNumber-1).sellItem(currentPerson);
+                } else{
+                    medicines.get(sellItemNumber-1).sellItem(currentPerson);
                 }
                 break;
             case 3:

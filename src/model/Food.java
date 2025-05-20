@@ -1,9 +1,9 @@
 package model;
 
 public class Food extends Item {
-    private double nutrition;
+    private int nutrition;
 
-    public Food(String name, double price, double physicalEffect, double mentalEffect, double spiritualEffect, double nutrition) {
+    public Food(String name, double price, int physicalEffect, int mentalEffect, int spiritualEffect, int nutrition) {
         super(name, price, physicalEffect, mentalEffect, spiritualEffect);
         this.nutrition = nutrition;
     }
