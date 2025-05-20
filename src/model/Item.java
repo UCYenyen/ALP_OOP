@@ -62,5 +62,4 @@ public abstract class Item {
     public void setSpiritualEffect(int spiritualEffect) {
         this.spiritualEffect = spiritualEffect;
     }
-    
 }

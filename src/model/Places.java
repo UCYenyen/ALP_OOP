@@ -8,7 +8,6 @@ public class Places {
     private String name;
     private int openHour;
     private int closeHour;
-    private int discount;
 
     private LinkedList<Item> itemsToSell = new LinkedList<>();
 
@@ -24,7 +23,25 @@ public class Places {
     public String getName() {
         return name;
     }
-    public void RandomizeItem(){
-
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getOpenHour() {
+        return openHour;
+    }
+    public void setOpenHour(int openHour) {
+        this.openHour = openHour;
+    }
+    public int getCloseHour() {
+        return closeHour;
+    }
+    public void setCloseHour(int closeHour) {
+        this.closeHour = closeHour;
+    }
+    public LinkedList<Item> getItemsToSell() {
+        return itemsToSell;
+    }
+    public void setItemsToSell(LinkedList<Item> itemsToSell) {
+        this.itemsToSell = itemsToSell;
     }
 }
