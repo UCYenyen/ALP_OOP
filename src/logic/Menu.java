@@ -69,7 +69,11 @@ public class Menu {
         } else {
             System.out.println("You are a healthy person");
         }
-        System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck!"); 
+        System.out.println();
+
+        currentPerson.showStatus();
+
+        System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n"); 
         while (true) {
             int choice = 0; 
             do{
@@ -77,6 +81,7 @@ public class Menu {
                 System.out.println("1. Do activities");
                 System.out.println("2. Buy items");
                 System.out.println("3. Inventory");
+                System.out.println("4. Go to work");
                 System.out.println("4. Create new activity");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
@@ -178,20 +183,20 @@ public class Menu {
             System.out.println("3. Spiritual Activity");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            System.out.println();
             if(choice < 1 || choice > 3){
                 System.out.println("Invalid choice");
             }
+             System.out.println();
         }while(choice < 1 || choice > 3);
         switch (choice) {
             case 1:
                 PhysicalActivity();
                 break;
             case 2:
-                // System.out.println("Mental Activity");
+                MentalActivity();
                 break;
             case 3:
-                // System.out.println("Spiritual Activity");
+                SpiritualActivity();
                 break;
         }
 
@@ -201,13 +206,106 @@ public class Menu {
         System.out.println("1. Create Physical Activity");
         System.out.println("2. Create Mental Activity");
         System.out.println("3. Create Spiritual Activity");
+        System.out.println();
+
     }
     private void PhysicalActivity(){
-        System.out.println("Physical Activity Menu");
-        System.out.println("1. Exercise");
-        System.out.println("2. Eat");
-        System.out.println("3. Sleep");
+        int choice = 0;
+        LinkedList<Activity> physicalAct = new LinkedList<>();
         
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
+                physicalAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Physical Activity Menu");
+            for(int i = 0; i < physicalAct.size(); i++){
+                System.out.println((i+1) + ". " + physicalAct.get(i).getName());
+            }
+            System.out.println((physicalAct.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 1 || choice > physicalAct.size()+1){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 1 || choice > physicalAct.size() +1);
+
+        if(choice == physicalAct.size()+1){
+            return;
+        }
+
+        physicalAct.get(choice-1).doActivity(currentPerson);
+       
+        currentPerson.showStatus();
+
+        incrementHour();
+    }
+    private void MentalActivity(){
+        int choice = 0;
+        LinkedList<Activity> mentalAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Mental")){
+                mentalAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Mental Activity Menu");
+            for(int i = 0; i < mentalAct.size(); i++){
+                System.out.println((i+1) + ". " + mentalAct.get(i).getName());
+            }
+            System.out.println((mentalAct.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 1 || choice > mentalAct.size()+1){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 1 || choice > mentalAct.size() +1);
+
+        if(choice == mentalAct.size()+1){
+            return;
+        }
+
+        mentalAct.get(choice-1).doActivity(currentPerson);
+
+        currentPerson.showStatus();
+
+        incrementHour();
+    }
+    private void SpiritualActivity(){
+        int choice = 0;
+        LinkedList<Activity> spritualAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Spiritual")){
+                spritualAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Spiritual Activity Menu");
+            for(int i = 0; i < spritualAct.size(); i++){
+                System.out.println((i+1) + ". " + spritualAct.get(i).getName());
+            }
+            System.out.println((spritualAct.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 1 || choice > spritualAct.size()+1){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 1 || choice > spritualAct.size() +1);
+
+        if(choice == spritualAct.size()+1){
+            return;
+        }
+
+        spritualAct.get(choice-1).doActivity(currentPerson);
+
+        currentPerson.showStatus();
+
         incrementHour();
     }
     //#endregion
@@ -216,6 +314,7 @@ public class Menu {
         System.out.println("1. Food");
         System.out.println("2. Drink");
         System.out.println("3. Medicine");
+        System.out.println();
 
         incrementHour();
     }

@@ -30,7 +30,8 @@ public class Person {
         activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other"));
     }
 
-    public void showStatus(){
+    public void showStatus() {
+        System.out.println("== " + this.name + "'s Status ==");
         System.out.println("Name: " + name);
         System.out.println("Money: " + money);
         System.out.println("Physical Health: " + physicalHealth);

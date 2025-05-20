@@ -6,7 +6,6 @@ public class Places {
     private Random r = new Random();
 
     private String name;
-    private boolean isOpen;
     private int openHour;
     private int closeHour;
     private int discount;
@@ -18,12 +17,9 @@ public class Places {
         this.openHour = r.nextInt(7, 11);
         this.closeHour = r.nextInt(20, 24);
         this.itemsToSell = itemsToSell;
-
-        isOpen = currentHour <= closeHour && currentHour >= openHour;
     }
     public boolean checkIfIsOpen(int currentHour){
-        isOpen = currentHour <= closeHour && currentHour >= openHour;
-        return isOpen;
+        return currentHour <= closeHour && currentHour >= openHour;
     }
     public String getName() {
         return name;
