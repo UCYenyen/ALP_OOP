@@ -63,6 +63,13 @@ public class Menu {
 
     private void mainMenu(){
         currentPerson = people.get(r.nextInt(people.size()));
+        System.out.println("Hello, " + currentPerson.getName());
+        if(currentPerson instanceof SickPerson){
+            System.out.println("You were destined to bear the sickness : " + ((SickPerson) currentPerson).getIllness());
+        } else {
+            System.out.println("You are a healthy person");
+        }
+        System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck!"); 
         while (true) {
             int choice = 0; 
             do{
