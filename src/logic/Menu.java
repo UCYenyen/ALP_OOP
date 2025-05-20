@@ -232,8 +232,8 @@ public class Menu {
             if(choice < 1 || choice > 3){
                 System.out.println("Invalid choice");
             }
-             System.out.println();
-        }while(choice < 1 || choice > 3);
+            System.out.println();
+        } while(choice < 1 || choice > 3);
         switch (choice) {
             case 1:
                 PhysicalActivity();
@@ -251,46 +251,81 @@ public class Menu {
 
     }
     private void createActivity(){
-        System.out.println("Create Activity Menu");
-        System.out.println("1. Create Physical Activity");
-        System.out.println("2. Create Mental Activity");
-        System.out.println("3. Create Spiritual Activity");
-        System.out.println();
-
-    }
-    private void OtherActivity(){
         int choice = 0;
-        LinkedList<Activity> otherAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
-                otherAct.add(currentPerson.getActivities().get(i));
-            }
-        }
         do{
-            System.out.println("Physical Activity Menu");
-            for(int i = 0; i < otherAct.size(); i++){
-                System.out.println((i+1) + ". " + otherAct.get(i).getName());
-            }
-            System.out.println((otherAct.size()+1) + ". Back");
+            System.out.println("Create Activity Menu");
+            System.out.println("1. Create Physical Activity");
+            System.out.println("2. Create Mental Activity");
+            System.out.println("3. Create Spiritual Activity");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 1 || choice > otherAct.size()+1){
+            if(choice < 1 || choice > 3){
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        }while(choice < 1 || choice > otherAct.size() +1);
-
-        if(choice == otherAct.size()+1){
-            return;
+        } while(choice < 1 || choice > 3);
+        
+        switch(choice){
+            case 1: 
+                createPhysicalActivity();
+                break;
+            case 2:
+                createMentalActivity();
+                break;
+            case 3:
+                createSpiritualActivity();
+                break;
         }
-
-        otherAct.get(choice-1).doActivity(currentPerson);
-       
-        currentPerson.showStatus();
-
-        // incrementHour();
     }
+
+    private void createPhysicalActivity(){
+        System.out.print("Enter activity name : ");
+        String name = s.next() + s.nextLine();
+        System.out.print("Enter activity price : ");
+        double price = s.nextDouble();
+        System.out.print("Enter physical effect : ");
+        int physicalEffect = s.nextInt();
+        System.out.print("Enter mental effect : ");
+        int mentalEffect = s.nextInt();
+        System.out.print("Enter spiritual effect : ");
+        int spiritualEffect = s.nextInt();
+
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Physical");
+        currentPerson.getActivities().add(act);
+    }
+
+    private void createMentalActivity(){
+        System.out.print("Enter activity name : ");
+        String name = s.next() + s.nextLine();
+        System.out.print("Enter activity price : ");
+        double price = s.nextDouble();
+        System.out.print("Enter physical effect : ");
+        int physicalEffect = s.nextInt();
+        System.out.print("Enter mental effect : ");
+        int mentalEffect = s.nextInt();
+        System.out.print("Enter spiritual effect : ");
+        int spiritualEffect = s.nextInt();
+
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Mental");
+        currentPerson.getActivities().add(act);
+    }
+
+    private void createSpiritualActivity(){
+        System.out.print("Enter activity name : ");
+        String name = s.next() + s.nextLine();
+        System.out.print("Enter activity price : ");
+        double price = s.nextDouble();
+        System.out.print("Enter physical effect : ");
+        int physicalEffect = s.nextInt();
+        System.out.print("Enter mental effect : ");
+        int mentalEffect = s.nextInt();
+        System.out.print("Enter spiritual effect : ");
+        int spiritualEffect = s.nextInt();
+
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Spiritual");
+        currentPerson.getActivities().add(act);
+    }
+    
     private void PhysicalActivity(){
         int choice = 0;
         LinkedList<Activity> physicalAct = new LinkedList<>();
@@ -319,7 +354,7 @@ public class Menu {
         }
 
         physicalAct.get(choice-1).doActivity(currentPerson);
-       
+        
         currentPerson.showStatus();
 
         incrementHour();
