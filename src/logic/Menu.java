@@ -277,6 +277,39 @@ public class Menu {
                 break;
         }
     }
+    private void OtherActivity(){
+        int choice = 0;
+        LinkedList<Activity> otherAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
+                otherAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Physical Activity Menu");
+            for(int i = 0; i < otherAct.size(); i++){
+                System.out.println((i+1) + ". " + otherAct.get(i).getName());
+            }
+            System.out.println((otherAct.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 1 || choice > otherAct.size()+1){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 1 || choice > otherAct.size() +1);
+
+        if(choice == otherAct.size()+1){
+            return;
+        }
+
+        otherAct.get(choice-1).doActivity(currentPerson);
+       
+        currentPerson.showStatus();
+
+        // incrementHour();
+    }
 
     private void createPhysicalActivity(){
         System.out.print("Enter activity name : ");
