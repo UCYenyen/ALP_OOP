@@ -3,6 +3,7 @@ package model;
 
 public class SickPerson extends Person {
     private String illness;
+    private Medicine medicine;
 
     public SickPerson(String name, String illness) {
         super(name);

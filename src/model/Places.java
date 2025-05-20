@@ -9,9 +9,9 @@ public class Places {
     private int openHour;
     private int closeHour;
 
-    private LinkedList<Item> itemsToSell = new LinkedList<>();
+    private Item[] itemsToSell = new Item[10];
 
-    public Places(String name, LinkedList<Item> itemsToSell, int currentHour) {
+    public Places(String name, Item[] itemsToSell, int currentHour) {
         this.name = name;
         this.openHour = r.nextInt(7, 11);
         this.closeHour = r.nextInt(20, 24);
@@ -38,10 +38,10 @@ public class Places {
     public void setCloseHour(int closeHour) {
         this.closeHour = closeHour;
     }
-    public LinkedList<Item> getItemsToSell() {
+    public Item[] getItemsToSell() {
         return itemsToSell;
     }
-    public void setItemsToSell(LinkedList<Item> itemsToSell) {
+    public void setItemsToSell(Item[] itemsToSell) {
         this.itemsToSell = itemsToSell;
     }
 }

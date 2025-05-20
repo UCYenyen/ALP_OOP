@@ -12,6 +12,9 @@ public class Menu {
 
     private int currentHour = 6;
 
+    // Places
+    private LinkedList<Places> places = new LinkedList<>();
+
     public Menu(){
         initializePerson();
         defaultMenu();
@@ -32,6 +35,48 @@ public class Menu {
             SickPerson p = new SickPerson(name, illness);
             people.add(p);
         }
+    }
+    private void initializePlaces(){
+        Item[] pharmacyStoreItems = {
+            new Medicine("Paracetamol", 10, 10, 0, 0, 1000),
+            new Medicine("Insulin", 20, 0, 0, 0, 5000), // For Diabetes
+            new Medicine("Amlodipine", 15, 0, 0, 0, 4000), // For Hypertension
+            new Medicine("Salbutamol", 10, 0, 0, 0, 3500), // For Asthma
+            new Medicine("Ibuprofen", 10, 0, 0, 0, 3000), // For Arthritis
+            new Medicine("Oseltamivir", 10, 0, 0, 0, 2500), // For Influenza
+            new Medicine("Antacid", 5, 0, 0, 0, 2000), // For GERD
+            new Medicine("Azithromycin", 15, 0, 0, 0, 6000), // For Pneumonia
+            new Medicine("Sertraline", 0, 20, 0, 0, 7000), // For Depression
+            new Medicine("Alprazolam", 0, 15, 0, 0, 6500), // For Anxiety Disorder
+            new Medicine("Lithium", 0, 25, 0, 0, 8000) // For Bipolar Disorder
+        };
+        Item[] supermarketItems = {
+            new Food("Bread", 5, 2, 1, 0, 1500),
+            new Food("Rice", 8, 1, 0, 0, 2000),
+            new Food("Eggs", 6, 2, 0, 0, 2500),
+            new Food("Milk", 4, 3, 1, 0, 3000),
+            new Food("Apple", 2, 1, 2, 0, 1200),
+            new Food("Banana", 2, 1, 2, 0, 1000),
+            new Food("Chicken", 10, 3, 0, 0, 5000),
+            new Food("Beef", 12, 2, 0, 0, 6000),
+            new Food("Vegetables", 1, 2, 3, 0, 1800),
+            new Food("Orange Juice", 1, 1, 2, 0, 2000),
+            new Food("Water", 0, 0, 1, 0, 500),
+            new Food("Cheese", 3, 2, 1, 0, 3500),
+            new Food("Yogurt", 2, 2, 1, 0, 2500),
+            new Food("Cereal", 4, 1, 1, 0, 2200),
+            new Food("Chocolate", 3, 1, 0, 0, 2000),
+            new Food("Instant Noodles", 5, 1, 0, 0, 1200),
+            new Food("Potato Chips", 2, 1, 0, 0, 1500),
+            new Food("Cookies", 3, 1, 0, 0, 1800),
+            new Food("Butter", 2, 2, 0, 0, 1600),
+            new Food("Jam", 2, 1, 1, 0, 1400)
+        };
+        // Item[] restaurantItems = {new Food("Pizza")};
+
+        places.add(new Places("Supermarket", supermarketItems, currentHour));
+        places.add(new Places("Pharmacy", pharmacyStoreItems, currentHour));
+        // places.add(new Places("Restaurant", restaurantItems, currentHour));
     }
 
 
@@ -181,6 +226,7 @@ public class Menu {
             System.out.println("1. Physical Activity");
             System.out.println("2. Mental Activity");
             System.out.println("3. Spiritual Activity");
+            System.out.println("4. Other Activity");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if(choice < 1 || choice > 3){
@@ -198,6 +244,9 @@ public class Menu {
             case 3:
                 SpiritualActivity();
                 break;
+            case 4:
+                OtherActivity();
+                break;
         }
 
     }
@@ -208,6 +257,39 @@ public class Menu {
         System.out.println("3. Create Spiritual Activity");
         System.out.println();
 
+    }
+    private void OtherActivity(){
+        int choice = 0;
+        LinkedList<Activity> otherAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
+                otherAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Physical Activity Menu");
+            for(int i = 0; i < otherAct.size(); i++){
+                System.out.println((i+1) + ". " + otherAct.get(i).getName());
+            }
+            System.out.println((otherAct.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 1 || choice > otherAct.size()+1){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 1 || choice > otherAct.size() +1);
+
+        if(choice == otherAct.size()+1){
+            return;
+        }
+
+        otherAct.get(choice-1).doActivity(currentPerson);
+       
+        currentPerson.showStatus();
+
+        // incrementHour();
     }
     private void PhysicalActivity(){
         int choice = 0;
