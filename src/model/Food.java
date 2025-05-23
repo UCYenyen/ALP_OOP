@@ -66,7 +66,7 @@ public class Food extends Item {
     public void buy(Person person) {
         if (person.getMoney() >= price) {
             person.setMoney(person.getMoney() - price);
-            Food itemToAdd = new Food(this.name, price, this.nutrition, this.hoursBeforeExpired);
+            Food itemToAdd = new Food(this.name, this.price, this.nutrition, this.hoursBeforeExpired);
             person.getInventory().add(itemToAdd);
             System.out.println("Item bought (-$" + price + ")");
             System.out.println();

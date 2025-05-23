@@ -7,21 +7,23 @@ public class Activity {
     private int spiritualEffect;
     private double price;
     private String category;
+    private int activityDuration;
 
-    public Activity(String name, int physicalEffect, int mentalEffect, int spiritualEffect, double price, String category) {
+    public Activity(String name, int physicalEffect, int mentalEffect, int spiritualEffect, double price, String category, int activityDuration) {
         this.name = name;
         this.physicalEffect = physicalEffect;
         this.mentalEffect = mentalEffect;
         this.spiritualEffect = spiritualEffect;
         this.price = price;
         this.category = category;
+        this.activityDuration = activityDuration; 
     }
     
-    public void doActivity(Person person) {
+    public int doActivity(Person person) {
         if(person.getMoney() < price) {
             System.out.println("You don't have enough money to do this activity.");
             System.out.println();
-            return;
+            return 0;
         }
         
         System.out.println(person.getName() + " is doing the activity");
@@ -31,6 +33,7 @@ public class Activity {
         person.setMentalHealth(person.getMentalHealth() + mentalEffect);
         person.setSpiritualHealth(person.getSpiritualHealth() + spiritualEffect);
         person.setMoney(person.getMoney() - price);
+        return activityDuration;
     }
 
     public String getName() {

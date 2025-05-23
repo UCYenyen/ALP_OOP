@@ -125,7 +125,7 @@ public class Menu {
         int choice = 0;
 
         do{
-            System.out.println("Welcome to Game");
+            System.out.println("\nWelcome to Game");
             System.out.println("1. Play Game");
             System.out.println("2. Exit Game");
             System.out.print("Choice : ");
@@ -164,8 +164,9 @@ public class Menu {
         System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n"); 
         while (true) {
             int choice = 0; 
+            System.out.println("Current Time: " + currentHour + ":00");
             do{
-                System.out.println("Main Menu");
+                System.out.println("\n=== Main Menu ===");
                 System.out.println("1. Do activities");
                 System.out.println("2. Buy items");
                 System.out.println("3. Inventory");
@@ -196,6 +197,175 @@ public class Menu {
                     createActivity();
                     break;
             }
+            if(currentPerson.getPhysicalHealth() > 100){
+                currentPerson.setPhysicalHealth(100);
+            }
+            if(currentPerson.getMentalHealth() > 100){
+                currentPerson.setMentalHealth(100);
+            }
+            if(currentPerson.getSpiritualHealth() > 100){
+                currentPerson.setSpiritualHealth(100);
+            }
+
+            if(currentPerson.getPhysicalHealth() < 0){
+                currentPerson.setPhysicalHealth(0);
+            }
+            if(currentPerson.getMentalHealth() < 0){
+                currentPerson.setMentalHealth(0);
+            }
+            if(currentPerson.getSpiritualHealth() < 0){
+                currentPerson.setSpiritualHealth(0);
+            }
+
+            currentPerson.showStatus(); 
+
+            if(currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100 && currentPerson.getSpiritualHealth() == 100){
+                System.out.println("You have achieved a balanced life! You win!");
+                defaultMenu();
+            } else if(currentPerson.getPhysicalHealth() == 0 || currentPerson.getMentalHealth() == 0 || currentPerson.getSpiritualHealth() == 0){
+                System.out.println("You have lost your balance! You lose!");
+                defaultMenu();
+            }
+        }
+    }
+
+
+    private void doActivities(){
+        int choice = 0;
+        do{
+            System.out.println("\n=== Activities Menu ===");
+            System.out.println("1. Physical Activity");
+            System.out.println("2. Mental Activity");
+            System.out.println("3. Spiritual Activity");
+            System.out.println("4. Sleep");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 0 || choice > 4){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        } while(choice < 0 || choice > 4);
+        switch (choice) {
+            case 0:
+                return;
+            case 1:
+                PhysicalActivity();
+                break;
+            case 2:
+                MentalActivity();
+                break;
+            case 3:
+                SpiritualActivity();
+                break;
+            case 4:
+                currentPerson.getActivities().get((0)).doActivity(currentPerson);
+                currentHour = 6;
+                break;
+        }
+    }
+
+
+    private void PhysicalActivity(){
+        int choice = 0;
+        LinkedList<Activity> physicalAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
+                physicalAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+
+        do{
+            System.out.println("\n=== Physical Activity Menu ===");
+            for(int i = 0; i < physicalAct.size(); i++){
+                System.out.println((i+1) + ". " + physicalAct.get(i).getName());
+            }
+            System.out.println(0 + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 0 || choice > physicalAct.size()){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        } while(choice < 0 || choice > physicalAct.size());
+
+        if(choice == 0){
+            return;
+        }
+
+        incrementHour(physicalAct.get(choice-1).doActivity(currentPerson));
+    }
+
+
+    private void MentalActivity(){
+        int choice = 0;
+        LinkedList<Activity> mentalAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Mental")){
+                mentalAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Mental Activity Menu");
+            for(int i = 0; i < mentalAct.size(); i++){
+                System.out.println((i+1) + ". " + mentalAct.get(i).getName());
+            }
+            System.out.println(0 + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 0 || choice > mentalAct.size()){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        } while(choice < 0 || choice > mentalAct.size());
+
+        if(choice == 0){
+            return;
+        }
+
+        incrementHour(mentalAct.get(choice-1).doActivity(currentPerson));
+    }
+
+
+    private void SpiritualActivity(){
+        int choice = 0;
+        LinkedList<Activity> spritualAct = new LinkedList<>();
+        
+        for(int i = 0; i < currentPerson.getActivities().size(); i++){
+            if(currentPerson.getActivities().get(i).getCategory().equals("Spiritual")){
+                spritualAct.add(currentPerson.getActivities().get(i));
+            }
+        }
+        do{
+            System.out.println("Spiritual Activity Menu");
+            for(int i = 0; i < spritualAct.size(); i++){
+                System.out.println((i+1) + ". " + spritualAct.get(i).getName());
+            }
+            System.out.println(0 + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if(choice < 0 || choice > spritualAct.size()){
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        }while(choice < 0 || choice > spritualAct.size());
+
+        if(choice == 0){
+            return;
+        }
+
+        incrementHour(spritualAct.get(choice-1).doActivity(currentPerson));        
+    }
+
+
+    private void incrementHour(int duration){
+        for(int i = 0; i < duration; i++){
+            currentHour++;
+            if(currentHour > 24){
+                currentHour = 1;
+            }
         }
     }
 
@@ -216,7 +386,7 @@ public class Menu {
                     System.out.println("Invalid choice");
                 }
 
-            }while(choice < 0 || choice > places.size());
+            } while(choice < 0 || choice > places.size());
             
             if(choice == 0){
                 return;
@@ -255,9 +425,9 @@ public class Menu {
                     System.out.println("Invalid choice");
                     System.out.println();
                 }
-            }while(choice < 0 || choice > items.length);
+            } while(choice < 0 || choice > items.length);
             
-            if(choice < items.length && choice != 0){
+            if(choice < items.length + 1 && choice != 0){
                 items[choice-1].buy(currentPerson);
             }
         }
@@ -273,7 +443,7 @@ public class Menu {
 
         System.out.println("== " + currentPerson.getName() +" Inventory ==");
 
-        if(medicines.isEmpty() && foods.isEmpty()){
+        if(currentPerson.getInventory().isEmpty()){
             System.out.println("Inventory is empty");
             System.out.println();
             return;
@@ -298,13 +468,15 @@ public class Menu {
             System.out.println((i+1) + ". " + medicines.get(i).getName());
         }
         
-        System.out.println("1. Use Item");
+        System.out.println("\n1. Use Item");
         System.out.println("2. Sell Item");
-        System.out.println("3. Back");
+        System.out.println("0. Back");
         System.out.print("Choice : ");
         int choice = s.nextInt();
 
         switch (choice) {
+            case 0:
+                return;
             case 1:
                 System.out.println("Use Item");
                 System.out.print("Enter item number : ");
@@ -325,46 +497,10 @@ public class Menu {
                     medicines.get(sellItemNumber-1).sell(currentPerson);
                 }
                 break;
-            case 3:
-                return;
+
         }
     }
     
-
-    private void doActivities(){
-        int choice = 0;
-        do{
-            System.out.println("Activities Menu");
-            System.out.println("1. Physical Activity");
-            System.out.println("2. Mental Activity");
-            System.out.println("3. Spiritual Activity");
-            System.out.println("4. Other Activity");
-            System.out.println("0. Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if(choice < 0 || choice > 4){
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        } while(choice < 0 || choice > 4);
-        switch (choice) {
-            case 0:
-                return;
-            case 1:
-                PhysicalActivity();
-                break;
-            case 2:
-                MentalActivity();
-                break;
-            case 3:
-                SpiritualActivity();
-                break;
-            case 4:
-                currentPerson.getActivities().get((0));
-                break;
-        }
-    }
-
 
     private void createActivity(){
         int choice = 0;
@@ -403,6 +539,8 @@ public class Menu {
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
         double price = s.nextDouble();
+        System.out.print("Enter activity duration (in hours) : ");
+        int duration = s.nextInt();
         System.out.print("Enter physical effect : ");
         int physicalEffect = s.nextInt();
         System.out.print("Enter mental effect : ");
@@ -410,8 +548,9 @@ public class Menu {
         System.out.print("Enter spiritual effect : ");
         int spiritualEffect = s.nextInt();
 
-        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Physical");
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Physical", duration);
         currentPerson.getActivities().add(act);
+        System.out.println();
     }
 
 
@@ -420,6 +559,8 @@ public class Menu {
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
         double price = s.nextDouble();
+        System.out.print("Enter activity duration (in hours) : ");
+        int duration = s.nextInt();
         System.out.print("Enter physical effect : ");
         int physicalEffect = s.nextInt();
         System.out.print("Enter mental effect : ");
@@ -427,8 +568,9 @@ public class Menu {
         System.out.print("Enter spiritual effect : ");
         int spiritualEffect = s.nextInt();
 
-        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Mental");
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Mental", duration);
         currentPerson.getActivities().add(act);
+        System.out.println();
     }
 
 
@@ -437,6 +579,8 @@ public class Menu {
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
         double price = s.nextDouble();
+        System.out.print("Enter activity duration (in hours) : ");
+        int duration = s.nextInt();
         System.out.print("Enter physical effect : ");
         int physicalEffect = s.nextInt();
         System.out.print("Enter mental effect : ");
@@ -444,120 +588,8 @@ public class Menu {
         System.out.print("Enter spiritual effect : ");
         int spiritualEffect = s.nextInt();
 
-        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Spiritual");
+        Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Spiritual", duration);
         currentPerson.getActivities().add(act);
-    }
-
-    
-    private void PhysicalActivity(){
-        int choice = 0;
-        LinkedList<Activity> physicalAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
-                physicalAct.add(currentPerson.getActivities().get(i));
-            }
-        }
-        do{
-            System.out.println("Physical Activity Menu");
-            for(int i = 0; i < physicalAct.size(); i++){
-                System.out.println((i+1) + ". " + physicalAct.get(i).getName());
-            }
-            System.out.println((physicalAct.size()+1) + ". Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if(choice < 1 || choice > physicalAct.size()+1){
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        }while(choice < 1 || choice > physicalAct.size() +1);
-
-        if(choice == physicalAct.size()+1){
-            return;
-        }
-
-        physicalAct.get(choice-1).doActivity(currentPerson);
-        
-        currentPerson.showStatus();
-
-        incrementHour();
-    }
-
-
-    private void MentalActivity(){
-        int choice = 0;
-        LinkedList<Activity> mentalAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Mental")){
-                mentalAct.add(currentPerson.getActivities().get(i));
-            }
-        }
-        do{
-            System.out.println("Mental Activity Menu");
-            for(int i = 0; i < mentalAct.size(); i++){
-                System.out.println((i+1) + ". " + mentalAct.get(i).getName());
-            }
-            System.out.println((mentalAct.size()+1) + ". Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if(choice < 1 || choice > mentalAct.size()+1){
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        }while(choice < 1 || choice > mentalAct.size() +1);
-
-        if(choice == mentalAct.size()+1){
-            return;
-        }
-
-        mentalAct.get(choice-1).doActivity(currentPerson);
-
-        currentPerson.showStatus();
-
-        incrementHour();
-    }
-
-
-    private void SpiritualActivity(){
-        int choice = 0;
-        LinkedList<Activity> spritualAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Spiritual")){
-                spritualAct.add(currentPerson.getActivities().get(i));
-            }
-        }
-        do{
-            System.out.println("Spiritual Activity Menu");
-            for(int i = 0; i < spritualAct.size(); i++){
-                System.out.println((i+1) + ". " + spritualAct.get(i).getName());
-            }
-            System.out.println((spritualAct.size()+1) + ". Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if(choice < 1 || choice > spritualAct.size()+1){
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        }while(choice < 1 || choice > spritualAct.size() +1);
-
-        if(choice == spritualAct.size()+1){
-            return;
-        }
-
-        spritualAct.get(choice-1).doActivity(currentPerson);
-
-        currentPerson.showStatus();
-
-        incrementHour();
-    }
-
-
-    private void incrementHour(){
-        currentHour++;
-        if(currentHour >= 24){
-            currentHour = 1;
-        }
+        System.out.println();
     }
 }
