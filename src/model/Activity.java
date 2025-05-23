@@ -16,6 +16,7 @@ public class Activity {
         this.price = price;
         this.category = category;
     }
+    
     public void doActivity(Person person) {
         if(person.getMoney() < price) {
             System.out.println("You don't have enough money to do this activity.");

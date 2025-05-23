@@ -12,73 +12,118 @@ public class Menu {
 
     private int currentHour = 6;
 
-    // Places
-    private LinkedList<Places> places = new LinkedList<>();
+    private LinkedList<Place> places = new LinkedList<>();
+
+    
 
     public Menu(){
-        initializePerson();
-        defaultMenu();
-    }
-
-    private void initializePerson(){
         String[] healthyPersonNames = {"Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma", "Felix"};
+        String[] sickPersonNames = {"Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon", "Christoper", "Christian"};
+        String [] illness_list = {"Diabetes", "Hypertension", "Asthma", "Arthritis", "Influenza", "GERD", "Pneumonia", "Depression", "Anxiety Disorder", "Bipolar Disorder"};
+        Medicine[] medicines = {
+            new Medicine("Metformin", 30, 30, "Physical"),
+            new Medicine("Amlodipine", 10, 20, "Physical"),
+            new Medicine("Seretide", 25, 30, "Physical"),
+            new Medicine("Lameson", 10, 8, "Physical"),
+            new Medicine("Paracetamol", 5, 10, "Physical"),
+            new Medicine("Omeprazole", 30, 40, "Physical"),
+            new Medicine("Amoksisilin", 70, 30, "Physical"),
+            new Medicine("Zypras", 60, 10, "Mental"),
+            new Medicine("Brintelix", 50, 10, "Mental"),
+            new Medicine("Olanzapine", 80, 20, "Mental"),
+
+            new Medicine("Metformin", 40, 40, "Physical"),
+            new Medicine("Amlodipine", 20, 40, "Physical"),
+            new Medicine("Seretide", 50, 50, "Physical"),
+            new Medicine("Lameson", 20, 16, "Physical"),
+            new Medicine("Paracetamol", 10, 20, "Physical"),
+            new Medicine("Omeprazole", 55, 50, "Physical"),
+            new Medicine("Amoksisilin", 80, 40, "Physical"),
+            new Medicine("Zypras", 90, 20, "Mental"),
+            new Medicine("Brintelix", 80, 20, "Mental"),
+            new Medicine("Olanzapine", 100, 30, "Mental")
+        };
+
+        // Healthy foods
+        Food[] healthyFoods = {
+            new Food("Salad", 10, 90, 2),
+            new Food("Sushi", 25, 85, 15),
+            new Food("Fruit Salad", 8, 80, 5),
+            new Food("Grilled Chicken Breast", 20, 75, 10),
+            new Food("Steamed Broccoli", 5, 95, 1),
+            new Food("Oatmeal", 7, 85, 2),
+            new Food("Quinoa Bowl", 15, 80, 8),
+            new Food("Greek Yogurt", 6, 70, 2),
+            new Food("Avocado Toast", 12, 75, 5),
+            new Food("Smoothie Bowl", 10, 80, 4),
+            new Food("Vegetable Soup", 8, 85, 3),
+            new Food("Grilled Salmon", 25, 90, 15),
+            new Food("Brown Rice", 7, 70, 2),
+            new Food("Boiled Eggs", 6, 80, 2),
+            new Food("Roasted Sweet Potato", 9, 75, 3)
+        };
+
+        // Fast foods
+        Food[] fastFoods = {
+            new Food("Pizza", 20, 30, 10),
+            new Food("Burger", 15, 25, 5),
+            new Food("Fried Chicken", 18, 20, 8),
+            new Food("French Fries", 8, 10, 2),
+            new Food("Hot Dog", 12, 15, 4),
+            new Food("Potato Chips", 5, 8, 1),
+            new Food("Chocolate", 3, 5, 1),
+            new Food("Ice Cream", 6, 10, 2),
+            new Food("Donut", 4, 7, 1),
+            new Food("Pasta", 20, 30, 10),
+            new Food("Steak", 30, 40, 20),
+            new Food("Fried Rice", 15, 25, 7),
+            new Food("Sandwich", 12, 35, 5),
+            new Food("Nachos", 10, 15, 3),
+            new Food("Taco", 11, 20, 4)
+        };
+
+        //Initialize healthy person
         for(int i = 0; i < 10; i++){
             String name = healthyPersonNames[i];
             Person p = new Person(name);
             people.add(p);
         }
-        String[] sickPersonNames = {"Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon", "Christoper", "Christian"};
-        String [] illness_list = {"Diabetes", "Hypertension", "Asthma", "Arthritis", "Influenza", "GERD", "Pneumonia", "Depression", "Anxiety Disorder", "Bipolar Disorder"};
+        //Initialize sick person
         for(int i = 0; i < 10; i++){
             String name = sickPersonNames[i];
             String illness = illness_list[i];
-            SickPerson p = new SickPerson(name, illness);
+            SickPerson p = new SickPerson(name, illness, medicines[i]);
             people.add(p);
         }
-    }
-    private void initializePlaces(){
-        Item[] pharmacyStoreItems = {
-            new Medicine("Paracetamol", 10, 10, 0, 0, 1000),
-            new Medicine("Insulin", 20, 0, 0, 0, 5000), // For Diabetes
-            new Medicine("Amlodipine", 15, 0, 0, 0, 4000), // For Hypertension
-            new Medicine("Salbutamol", 10, 0, 0, 0, 3500), // For Asthma
-            new Medicine("Ibuprofen", 10, 0, 0, 0, 3000), // For Arthritis
-            new Medicine("Oseltamivir", 10, 0, 0, 0, 2500), // For Influenza
-            new Medicine("Antacid", 5, 0, 0, 0, 2000), // For GERD
-            new Medicine("Azithromycin", 15, 0, 0, 0, 6000), // For Pneumonia
-            new Medicine("Sertraline", 0, 20, 0, 0, 7000), // For Depression
-            new Medicine("Alprazolam", 0, 15, 0, 0, 6500), // For Anxiety Disorder
-            new Medicine("Lithium", 0, 25, 0, 0, 8000) // For Bipolar Disorder
-        };
-        Item[] supermarketItems = {
-            new Food("Bread", 5, 2, 1, 0, 1500),
-            new Food("Rice", 8, 1, 0, 0, 2000),
-            new Food("Eggs", 6, 2, 0, 0, 2500),
-            new Food("Milk", 4, 3, 1, 0, 3000),
-            new Food("Apple", 2, 1, 2, 0, 1200),
-            new Food("Banana", 2, 1, 2, 0, 1000),
-            new Food("Chicken", 10, 3, 0, 0, 5000),
-            new Food("Beef", 12, 2, 0, 0, 6000),
-            new Food("Vegetables", 1, 2, 3, 0, 1800),
-            new Food("Orange Juice", 1, 1, 2, 0, 2000),
-            new Food("Water", 0, 0, 1, 0, 500),
-            new Food("Cheese", 3, 2, 1, 0, 3500),
-            new Food("Yogurt", 2, 2, 1, 0, 2500),
-            new Food("Cereal", 4, 1, 1, 0, 2200),
-            new Food("Chocolate", 3, 1, 0, 0, 2000),
-            new Food("Instant Noodles", 5, 1, 0, 0, 1200),
-            new Food("Potato Chips", 2, 1, 0, 0, 1500),
-            new Food("Cookies", 3, 1, 0, 0, 1800),
-            new Food("Butter", 2, 2, 0, 0, 1600),
-            new Food("Jam", 2, 1, 1, 0, 1400)
-        };
-        // Item[] restaurantItems = {new Food("Pizza")};
 
-        places.add(new Places("Supermarket", supermarketItems, currentHour));
-        places.add(new Places("Pharmacy", pharmacyStoreItems, currentHour));
-        // places.add(new Places("Restaurant", restaurantItems, currentHour));
-    }
+        // Initialize Pharmacies
+        LinkedList<Medicine> usedMedicines = new LinkedList<>();
 
+        for(int i = 0; i < 2; i ++){
+            int added = 0;
+            Item[] itemToAdd = new Item[10];
+            while (added < 10) {
+                int idx = r.nextInt(medicines.length);
+                Medicine med = medicines[idx];
+                if (!usedMedicines.contains(med)) {
+                    itemToAdd[added] = med;
+                    usedMedicines.add(med);
+                    added++;
+                }
+            }
+            if(i == 0){
+                places.add(new Place("Pharmacy A", itemToAdd));
+            } else {
+                places.add(new Place("Pharmacy B", itemToAdd));
+            }
+        }
+
+        // Initialize Restaurants
+        places.add(new Place("Healthy Restaurant", healthyFoods));
+        places.add(new Place("Fast Food Restaurant", fastFoods));
+
+        defaultMenu();
+    }
 
     private void defaultMenu(){
         int choice = 0;
@@ -127,29 +172,71 @@ public class Menu {
                 System.out.println("2. Buy items");
                 System.out.println("3. Inventory");
                 System.out.println("4. Go to work");
-                System.out.println("4. Create new activity");
+                System.out.println("5. Create new activity");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
                 System.out.println();
-                if(choice < 1 || choice > 4){
+                if(choice < 1 || choice > 5){
                     System.out.println("Invalid choice");
                 }
-            } while(choice < 1 || choice > 4);
+            } while(choice < 1 || choice > 5);
             
             switch (choice) {
                 case 1:
                     doActivities();
                     break;
                 case 2:
+                    showPlaces();
                     break;
                 case 3:
                     showInventory();
                     break;
                 case 4:
+                    System.out.println("Go to work");
+                    break;
+                case 5:
                     createActivity();
                     break;
             }
         }
+    }
+    private void showPlaces(){
+        int choice = 0;
+        do{
+            System.out.println("Places Menu");
+            for(int i = 0; i < places.size(); i++){
+                System.out.println((i+1) + ". " + places.get(i).getName());
+            }
+            System.out.println((places.size()+1) + ". Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            System.out.println();
+            if(choice < 1 || choice > places.size()+1){
+                System.out.println("Invalid choice");
+            }
+        }while(choice < 1 || choice > places.size() +1);
+        
+        showPlaceDetail(choice-1);
+    }
+    private void showPlaceDetail(int placeIndex){
+        System.out.println("Place Detail");
+        System.out.println("Name : " + places.get(placeIndex).getName());
+        System.out.println("Items : ");
+        Item[] items = places.get(placeIndex).getItemsToSell();
+        System.out.printf("%-4s %-25s %-15s %-10s\n", "No.", "Name", "Detail", "Price");
+        System.out.println("-------------------------------------------------------------");
+        for (int i = 0; i < items.length; i++) {
+            String detail;
+            if (items[i] instanceof Medicine) {
+            detail = "Dosage: " + ((Medicine) items[i]).getDosage();
+            } else if (items[i] instanceof Food) {
+            detail = "Nutrition: " + ((Food) items[i]).getNutrition();
+            } else {
+            detail = "-";
+            }
+            System.out.printf("%-4d %-25s %-15s %-10.2f\n", (i + 1), items[i].getName(), detail, items[i].getPrice());
+        }
+        System.out.println();
     }
     //#region inventory
     private void showInventory() {
@@ -207,7 +294,7 @@ public class Menu {
                 if(sellItemNumber > medicines.size()){
                     System.out.println("Item not found");
                 } else{
-                    medicines.get(sellItemNumber-1).sellItem(currentPerson);
+                    medicines.get(sellItemNumber-1).sell(currentPerson);
                 }
                 break;
             case 3:
@@ -305,7 +392,7 @@ public class Menu {
         }
 
         otherAct.get(choice-1).doActivity(currentPerson);
-       
+    
         currentPerson.showStatus();
 
         // incrementHour();

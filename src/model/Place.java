@@ -2,16 +2,15 @@ package model;
 
 import java.util.*;
 
-public class Places {
+public class Place {
     private Random r = new Random();
 
     private String name;
     private int openHour;
     private int closeHour;
-
     private Item[] itemsToSell = new Item[10];
 
-    public Places(String name, Item[] itemsToSell, int currentHour) {
+    public Place(String name, Item[] itemsToSell) {
         this.name = name;
         this.openHour = r.nextInt(7, 11);
         this.closeHour = r.nextInt(20, 24);

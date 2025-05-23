@@ -7,17 +7,14 @@ public abstract class Item {
     protected int mentalEffect;
     protected int spiritualEffect;
 
-    public Item(String name, double price, int physicalEffect, int mentalEffect, int spiritualEffect) {
+    public Item(String name, double price) {
         this.name = name;
         this.price = price;
-        this.physicalEffect = physicalEffect;
-        this.mentalEffect = mentalEffect;
-        this.spiritualEffect = spiritualEffect;
     }
 
     public abstract void use(Person person);
 
-    public void sellItem(Person person){
+    public void sell(Person person){
         person.setMoney(person.getMoney() + price);
         person.getInventory().remove(this);
         System.out.println("Item sold (+$" + (price * 0.8) + ")");
