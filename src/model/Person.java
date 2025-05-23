@@ -10,6 +10,7 @@ public class Person {
     protected int spiritualHealth;
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
+    
     protected Random r = new Random();
 
     public Person(String name) {

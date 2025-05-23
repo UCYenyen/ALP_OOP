@@ -61,6 +61,7 @@ public class Food extends Item {
             person.getInventory().remove(this);
         }
     }
+
     @Override
     public void buy(Person person) {
         if (person.getMoney() >= price) {

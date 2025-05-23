@@ -8,11 +8,10 @@ public class Menu {
     private Random r = new Random();
 
     private LinkedList<Person> people = new LinkedList<>();
-    private Person currentPerson;
-
-    private int currentHour = 6;
-
     private LinkedList<Place> places = new LinkedList<>();
+
+    private Person currentPerson;
+    private int currentHour = 6;
 
     public Menu(){
         String[] healthyPersonNames = {"Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma", "Felix"};
@@ -42,7 +41,6 @@ public class Menu {
             new Medicine("Olanzapine", 100, 30, "Mental")
         };
 
-        // Healthy foods
         Food[] healthyFoods = {
             new Food("Salad", 10, 90, 2),
             new Food("Sushi", 25, 85, 15),
@@ -61,7 +59,6 @@ public class Menu {
             new Food("Roasted Sweet Potato", 9, 75, 3)
         };
 
-        // Fast foods
         Food[] fastFoods = {
             new Food("Pizza", 20, 30, 10),
             new Food("Burger", 15, 25, 5),
@@ -86,6 +83,7 @@ public class Menu {
             Person p = new Person(name);
             people.add(p);
         }
+
         //Initialize sick person
         for(int i = 0; i < 10; i++){
             String name = sickPersonNames[i];
@@ -149,6 +147,7 @@ public class Menu {
         }
     }
 
+
     private void mainMenu(){
         currentPerson = people.get(r.nextInt(people.size()));
         System.out.println("Hello, " + currentPerson.getName());
@@ -199,6 +198,8 @@ public class Menu {
             }
         }
     }
+
+
     private void showPlaces(boolean isShowingPlaces){
         int choice = 0;
         while (isShowingPlaces) {
@@ -223,6 +224,8 @@ public class Menu {
             showPlaceDetail(choice-1);
         }
     }
+
+
     private void showPlaceDetail(int placeIndex){
         int choice = -1;
         Item[] items = places.get(placeIndex).getItemsToSell();
@@ -262,7 +265,8 @@ public class Menu {
             showPlaces(false);
         }
     }
-    //#region inventory
+
+
     private void showInventory() {
         LinkedList<Item> medicines = new LinkedList<>();
         LinkedList<Item> foods = new LinkedList<>(); 
@@ -322,13 +326,10 @@ public class Menu {
                 }
                 break;
             case 3:
-                buyItems();
                 return;
         }
     }
-    //#endregion
     
-    //#region activities
 
     private void doActivities(){
         int choice = 0;
@@ -363,6 +364,8 @@ public class Menu {
                 break;
         }
     }
+
+
     private void createActivity(){
         int choice = 0;
         do{
@@ -394,6 +397,7 @@ public class Menu {
         }
     }
 
+
     private void createPhysicalActivity(){
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
@@ -409,6 +413,7 @@ public class Menu {
         Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Physical");
         currentPerson.getActivities().add(act);
     }
+
 
     private void createMentalActivity(){
         System.out.print("Enter activity name : ");
@@ -426,6 +431,7 @@ public class Menu {
         currentPerson.getActivities().add(act);
     }
 
+
     private void createSpiritualActivity(){
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
@@ -441,6 +447,7 @@ public class Menu {
         Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Spiritual");
         currentPerson.getActivities().add(act);
     }
+
     
     private void PhysicalActivity(){
         int choice = 0;
@@ -475,6 +482,8 @@ public class Menu {
 
         incrementHour();
     }
+
+
     private void MentalActivity(){
         int choice = 0;
         LinkedList<Activity> mentalAct = new LinkedList<>();
@@ -508,6 +517,8 @@ public class Menu {
 
         incrementHour();
     }
+
+
     private void SpiritualActivity(){
         int choice = 0;
         LinkedList<Activity> spritualAct = new LinkedList<>();
@@ -541,16 +552,7 @@ public class Menu {
 
         incrementHour();
     }
-    //#endregion
-    private void buyItems(){
-        System.out.println("Main Menu");
-        System.out.println("1. Food");
-        System.out.println("2. Drink");
-        System.out.println("3. Medicine");
-        System.out.println();
 
-        incrementHour();
-    }
 
     private void incrementHour(){
         currentHour++;
