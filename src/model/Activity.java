@@ -24,7 +24,7 @@ public class Activity {
             return;
         }
         
-        System.out.println("Doing " + name);
+        System.out.println(person.getName() + " is doing the activity");
         System.out.println();
 
         person.setPhysicalHealth(person.getPhysicalHealth() + physicalEffect);

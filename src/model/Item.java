@@ -18,8 +18,9 @@ public abstract class Item {
         person.setMoney(person.getMoney() + price);
         person.getInventory().remove(this);
         System.out.println("Item sold (+$" + (price * 0.8) + ")");
+        System.out.println();
     }
-
+    public abstract void buy(Person person);
     public String getName() {
         return name;
     }

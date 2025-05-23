@@ -61,6 +61,19 @@ public class Food extends Item {
             person.getInventory().remove(this);
         }
     }
+    @Override
+    public void buy(Person person) {
+        if (person.getMoney() >= price) {
+            person.setMoney(person.getMoney() - price);
+            Food itemToAdd = new Food(this.name, price, this.nutrition, this.hoursBeforeExpired);
+            person.getInventory().add(itemToAdd);
+            System.out.println("Item bought (-$" + price + ")");
+            System.out.println();
+        } else {
+            System.out.println("Not enough money to buy this item.");
+            System.out.println();
+        }
+    }
 
     public int getNutrition() {
         return nutrition;

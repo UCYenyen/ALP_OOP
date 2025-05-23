@@ -59,7 +59,18 @@ public class Medicine extends Item {
         
         spiritualEffect = 0;
     }
-
+    @Override
+    public void buy(Person person) {
+        if(person.getMoney() >= price){
+            person.setMoney(person.getMoney() - price);
+            person.getInventory().add(this);
+            System.out.println("Item bought (-$" + price + ")");
+            System.out.println();
+        } else {
+            System.out.println("Not enough money to buy this item.");
+            System.out.println();
+        }
+    }
     @Override
     public void use(Person person) {
         if(person instanceof SickPerson){

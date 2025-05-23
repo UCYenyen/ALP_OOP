@@ -14,8 +14,6 @@ public class Menu {
 
     private LinkedList<Place> places = new LinkedList<>();
 
-    
-
     public Menu(){
         String[] healthyPersonNames = {"Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma", "Felix"};
         String[] sickPersonNames = {"Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon", "Christoper", "Christian"};
@@ -156,6 +154,7 @@ public class Menu {
         System.out.println("Hello, " + currentPerson.getName());
         if(currentPerson instanceof SickPerson){
             System.out.println("You were destined to bear the sickness : " + ((SickPerson) currentPerson).getIllness());
+            System.out.println("Medicine : " + ((SickPerson) currentPerson).getMedicine().getName() + " (" +((SickPerson) currentPerson).getMedicine().getDosage() + "mg)");
         } else {
             System.out.println("You are a healthy person");
         }
@@ -186,7 +185,7 @@ public class Menu {
                     doActivities();
                     break;
                 case 2:
-                    showPlaces();
+                    showPlaces(true);
                     break;
                 case 3:
                     showInventory();
@@ -200,43 +199,68 @@ public class Menu {
             }
         }
     }
-    private void showPlaces(){
+    private void showPlaces(boolean isShowingPlaces){
         int choice = 0;
-        do{
-            System.out.println("Places Menu");
-            for(int i = 0; i < places.size(); i++){
-                System.out.println((i+1) + ". " + places.get(i).getName());
+        while (isShowingPlaces) {
+            do{
+                System.out.println("Places Menu");
+                for(int i = 0; i < places.size(); i++){
+                    System.out.println((i+1) + ". " + places.get(i).getName());
+                }
+                System.out.println(0 + ". Back");
+                System.out.print("Choice : ");
+                choice = s.nextInt();
+                System.out.println();
+                if(choice < 0 || choice > places.size()){
+                    System.out.println("Invalid choice");
+                }
+
+            }while(choice < 0 || choice > places.size());
+            
+            if(choice == 0){
+                return;
             }
-            System.out.println((places.size()+1) + ". Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            System.out.println();
-            if(choice < 1 || choice > places.size()+1){
-                System.out.println("Invalid choice");
-            }
-        }while(choice < 1 || choice > places.size() +1);
-        
-        showPlaceDetail(choice-1);
+            showPlaceDetail(choice-1);
+        }
     }
     private void showPlaceDetail(int placeIndex){
-        System.out.println("Place Detail");
-        System.out.println("Name : " + places.get(placeIndex).getName());
-        System.out.println("Items : ");
+        int choice = -1;
         Item[] items = places.get(placeIndex).getItemsToSell();
-        System.out.printf("%-4s %-25s %-15s %-10s\n", "No.", "Name", "Detail", "Price");
-        System.out.println("-------------------------------------------------------------");
-        for (int i = 0; i < items.length; i++) {
-            String detail;
-            if (items[i] instanceof Medicine) {
-            detail = "Dosage: " + ((Medicine) items[i]).getDosage();
-            } else if (items[i] instanceof Food) {
-            detail = "Nutrition: " + ((Food) items[i]).getNutrition();
-            } else {
-            detail = "-";
+        while ((choice != 0 && choice < items.length) || choice > items.length) {
+            do{
+                System.out.println("Place Detail");
+                System.out.println("Your money : $" + currentPerson.getMoney());
+                System.out.println("Name : " + places.get(placeIndex).getName());
+                System.out.println("Items : ");
+                System.out.printf("%-4s %-25s %-15s %-10s\n", "No.", "Name", "Detail", "Price");
+                System.out.println("-------------------------------------------------------------");
+                for (int i = 0; i < items.length; i++) {
+                    String detail = "";
+                    if (items[i] instanceof Medicine) {
+                    detail = "Dosage: " + ((Medicine) items[i]).getDosage() + "mg";
+                    } else if (items[i] instanceof Food) {
+                    detail = "Nutrition: " + ((Food) items[i]).getNutrition() + "%";
+                    }
+                    System.out.printf("%-4d %-25s %-15s %-10.2f\n", (i + 1), items[i].getName(), detail, items[i].getPrice());
+                }
+                System.out.println("-------------------------------------------------------------");
+                System.out.println(0 + ". Back");
+                System.out.print("Choice : ");
+                choice = s.nextInt();
+                System.out.println();
+                if(choice < 0 || choice > items.length){
+                    System.out.println("Invalid choice");
+                    System.out.println();
+                }
+            }while(choice < 0 || choice > items.length);
+            
+            if(choice < items.length && choice != 0){
+                items[choice-1].buy(currentPerson);
             }
-            System.out.printf("%-4d %-25s %-15s %-10.2f\n", (i + 1), items[i].getName(), detail, items[i].getPrice());
         }
-        System.out.println();
+        if(choice == 0){
+            showPlaces(false);
+        }
     }
     //#region inventory
     private void showInventory() {
@@ -314,14 +338,17 @@ public class Menu {
             System.out.println("2. Mental Activity");
             System.out.println("3. Spiritual Activity");
             System.out.println("4. Other Activity");
+            System.out.println("0. Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 1 || choice > 3){
+            if(choice < 0 || choice > 4){
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 1 || choice > 3);
+        } while(choice < 0 || choice > 4);
         switch (choice) {
+            case 0:
+                return;
             case 1:
                 PhysicalActivity();
                 break;
@@ -332,10 +359,9 @@ public class Menu {
                 SpiritualActivity();
                 break;
             case 4:
-                OtherActivity();
+                currentPerson.getActivities().get((0));
                 break;
         }
-
     }
     private void createActivity(){
         int choice = 0;
@@ -344,15 +370,18 @@ public class Menu {
             System.out.println("1. Create Physical Activity");
             System.out.println("2. Create Mental Activity");
             System.out.println("3. Create Spiritual Activity");
+            System.out.println("0. Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 1 || choice > 3){
+            if(choice < 0 || choice > 3){
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 1 || choice > 3);
+        } while(choice < 0 || choice > 3);
         
         switch(choice){
+            case 0:
+                return;
             case 1: 
                 createPhysicalActivity();
                 break;
@@ -363,39 +392,6 @@ public class Menu {
                 createSpiritualActivity();
                 break;
         }
-    }
-    private void OtherActivity(){
-        int choice = 0;
-        LinkedList<Activity> otherAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
-                otherAct.add(currentPerson.getActivities().get(i));
-            }
-        }
-        do{
-            System.out.println("Physical Activity Menu");
-            for(int i = 0; i < otherAct.size(); i++){
-                System.out.println((i+1) + ". " + otherAct.get(i).getName());
-            }
-            System.out.println((otherAct.size()+1) + ". Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if(choice < 1 || choice > otherAct.size()+1){
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        }while(choice < 1 || choice > otherAct.size() +1);
-
-        if(choice == otherAct.size()+1){
-            return;
-        }
-
-        otherAct.get(choice-1).doActivity(currentPerson);
-    
-        currentPerson.showStatus();
-
-        // incrementHour();
     }
 
     private void createPhysicalActivity(){

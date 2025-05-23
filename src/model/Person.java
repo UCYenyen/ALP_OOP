@@ -18,16 +18,16 @@ public class Person {
         this.physicalHealth = r.nextInt(20,41);
         this.mentalHealth = r.nextInt(20,41);
         this.spiritualHealth = r.nextInt(20,41);
+        activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other"));
         activities.add(new Activity("Meditation", -5,15, 8, 0, "Mental"));
         activities.add(new Activity("Psychologist Consultation", -10, 40, 5, 200, "Mental"));
-        activities.add(new Activity("Journaling", -8, 10, 5, 0, "Mental"));
-        activities.add(new Activity("Listening to Music", -10, 8, 5, 0, "Mental"));
-        activities.add(new Activity("Jogging", 20, 10, -10, 0, "Physical"));
-        activities.add(new Activity("Swimming", 15, 10, -10, 0, "Physical"));
-        activities.add(new Activity("Playing Golf", 30, 10, -10, 150, "Physical"));
+        activities.add(new Activity("Write Journal", -8, 10, 5, 0, "Mental"));
+        activities.add(new Activity("Listen to Music", -10, 8, 5, 0, "Mental"));
+        activities.add(new Activity("Aerobic Dance", 20, 10, -10, 0, "Physical"));
+        activities.add(new Activity("Swim", 15, 10, -10, 0, "Physical"));
+        activities.add(new Activity("Play Golf", 30, 10, -10, 150, "Physical"));
         activities.add(new Activity("Pray", -2, 8, 20, 0, "Spiritual"));
         activities.add(new Activity("Read Holy Book", -5, 10, 15, 0, "Spiritual"));
-        activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other"));
     }
 
     public void showStatus() {
