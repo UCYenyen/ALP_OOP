@@ -8,8 +8,10 @@ public class Person {
     protected int physicalHealth;
     protected int mentalHealth;
     protected int spiritualHealth;
+
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
+    protected Job job = null;
     
     protected Random r = new Random();
 
@@ -95,5 +97,11 @@ public class Person {
 
     public void setActivities(LinkedList<Activity> activities) {
         this.activities = activities;
+    }
+    public Job getJob() {
+        return job;
+    }
+    public void setJob(Job job) {
+        this.job = job;
     }
 }

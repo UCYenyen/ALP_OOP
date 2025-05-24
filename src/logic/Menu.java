@@ -14,6 +14,34 @@ public class Menu {
     private int currentHour = 6;
 
     public Menu() {
+        //#region jobs
+        Job[] healthyPersonJobs = {
+            new Job("Software Engineer", r.nextInt(50, 121)),
+            new Job("Data Scientist", r.nextInt(50, 121)),
+            new Job("Doctor", r.nextInt(50, 121)),
+            new Job("Teacher", r.nextInt(50, 121)),
+            new Job("Nurse", r.nextInt(50, 121)),
+            new Job("Accountant", r.nextInt(50, 121)),
+            new Job("Chef", r.nextInt(50, 121)),
+            new Job("Graphic Designer", r.nextInt(50, 121)),
+            new Job("Salesperson", r.nextInt(50, 121)),
+            new Job("Marketing Specialist", r.nextInt(50, 121))
+        };
+        Job[] sickPersonJobs = {
+            new Job("Unemployed", r.nextInt(50, 121)),
+            new Job("Freelancer", r.nextInt(50, 121)),
+            new Job("Part-time Worker", r.nextInt(50, 121)),
+            new Job("Consultant", r.nextInt(50, 121)),
+            new Job("Retired", r.nextInt(50, 121)),
+            new Job("Student", r.nextInt(50, 121)),
+            new Job("Intern", r.nextInt(50, 121)),
+            new Job("Volunteer", r.nextInt(50, 121)),
+            new Job("Researcher", r.nextInt(50, 121)),
+            new Job("Artist", r.nextInt(50, 121))
+        };
+
+        
+        //#endregion
         String[] healthyPersonNames = { "Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma",
                 "Felix" };
         String[] sickPersonNames = { "Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon",
@@ -85,6 +113,7 @@ public class Menu {
             String name = healthyPersonNames[i];
             Person p = new Person(name);
             people.add(p);
+            p.setJob(healthyPersonJobs[r.nextInt(healthyPersonJobs.length)]);
         }
 
         // Initialize sick person
@@ -92,6 +121,7 @@ public class Menu {
             String name = sickPersonNames[i];
             String illness = illness_list[i];
             SickPerson p = new SickPerson(name, illness, medicines[i]);
+            p.setJob(sickPersonJobs[r.nextInt(sickPersonJobs.length)]);
             people.add(p);
         }
 
@@ -195,7 +225,7 @@ public class Menu {
                     showInventory();
                     break;
                 case 4:
-                    doWork();
+                    printWorkMenu();
                     break;
                 case 5:
                     createActivity();
@@ -271,23 +301,37 @@ public class Menu {
         }
     }
 
-    private void doWork(){
-        int duration = r.nextInt(6, 9);
-        int salary = r.nextInt(10, 31);
+    private void printWorkMenu(){
+        int choice = 0;
+        do{
+            System.out.println("=== [Work Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
+            System.out.println("1. Do Work");
+            System.out.println("2. Create Work Activity");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if (choice < 0 || choice > 2) {
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        } while (choice < 0 || choice > 2);
 
-        System.out.println("=== [Work] ===");
-        System.out.println("Current Time: " + currentHour + ":00");
-        System.out.println("Working..... ");
-        System.out.println();
+        if(currentPerson.getJob() == null) {
+            System.out.println("You don't have a job yet. Please get a job first.");
+            return;
+        }
 
-        incrementHour(duration);
-
-        System.out.println("Work done for " + duration + " hours");
-        System.out.println("Current Time: " + currentHour + ":00");
-        System.out.println("You earned $" + salary);
-        System.out.println();
-        currentPerson.setMoney(currentPerson.getMoney() + salary);
-        System.out.println();
+        switch (choice) {
+            case 0:
+                return;
+            case 1:
+                incrementHour(currentPerson.getJob().doWork(currentPerson));
+                break;
+            case 2:
+                currentPerson.getJob().createWork();
+                break;
+        }
     }
 
     private void PhysicalActivity() {

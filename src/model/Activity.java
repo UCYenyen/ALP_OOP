@@ -9,6 +9,9 @@ public class Activity {
     private String category;
     private int activityDuration;
 
+    //for work ini masih belum tentu bener
+    private double salary = 0;
+
     public Activity(String name, int physicalEffect, int mentalEffect, int spiritualEffect, double price, String category, int activityDuration) {
         this.name = name;
         this.physicalEffect = physicalEffect;
@@ -17,6 +20,16 @@ public class Activity {
         this.price = price;
         this.category = category;
         this.activityDuration = activityDuration; 
+    }
+    public Activity(String name, int physicalEffect, int mentalEffect, int spiritualEffect, double price, String category, int activityDuration, double salary) {
+        this.name = name;
+        this.physicalEffect = physicalEffect;
+        this.mentalEffect = mentalEffect;
+        this.spiritualEffect = spiritualEffect;
+        this.price = price;
+        this.category = category;
+        this.activityDuration = activityDuration; 
+        this.salary = salary;
     }
     
     public int doActivity(Person person) {
@@ -33,6 +46,12 @@ public class Activity {
         person.setMentalHealth(person.getMentalHealth() + mentalEffect);
         person.setSpiritualHealth(person.getSpiritualHealth() + spiritualEffect);
         person.setMoney(person.getMoney() - price);
+
+        if (salary > 0) {
+            person.setMoney(person.getMoney() + salary);
+            System.out.println("You earned $" + salary);
+            System.out.println();
+        }
         return activityDuration;
     }
 
@@ -82,5 +101,17 @@ public class Activity {
     
     public void setCategory(String category) {
         this.category = category;
+    }
+    public int getActivityDuration() {
+        return activityDuration;
+    }
+    public void setActivityDuration(int activityDuration) {
+        this.activityDuration = activityDuration;
+    }
+    public double getSalary() {
+        return salary;
+    }
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 }
