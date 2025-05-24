@@ -76,6 +76,10 @@ public class Food extends Item {
         }
     }
 
+    public void expire(int time){
+        this.hoursBeforeExpired -= time;
+    }
+
     public int getNutrition() {
         return nutrition;
     }

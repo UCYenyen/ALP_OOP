@@ -13,79 +13,82 @@ public class Menu {
     private Person currentPerson;
     private int currentHour = 6;
 
-    public Menu(){
-        String[] healthyPersonNames = {"Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma", "Felix"};
-        String[] sickPersonNames = {"Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon", "Christoper", "Christian"};
-        String [] illness_list = {"Diabetes", "Hypertension", "Asthma", "Arthritis", "Influenza", "GERD", "Pneumonia", "Depression", "Anxiety Disorder", "Bipolar Disorder"};
+    public Menu() {
+        String[] healthyPersonNames = { "Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma",
+                "Felix" };
+        String[] sickPersonNames = { "Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon",
+                "Christoper", "Christian" };
+        String[] illness_list = { "Diabetes", "Hypertension", "Asthma", "Arthritis", "Influenza", "GERD", "Pneumonia",
+                "Depression", "Anxiety Disorder", "Bipolar Disorder" };
         Medicine[] medicines = {
-            new Medicine("Metformin", 30, 30, "Physical"),
-            new Medicine("Amlodipine", 10, 20, "Physical"),
-            new Medicine("Seretide", 25, 30, "Physical"),
-            new Medicine("Lameson", 10, 8, "Physical"),
-            new Medicine("Paracetamol", 5, 10, "Physical"),
-            new Medicine("Omeprazole", 30, 40, "Physical"),
-            new Medicine("Amoksisilin", 70, 30, "Physical"),
-            new Medicine("Zypras", 60, 10, "Mental"),
-            new Medicine("Brintelix", 50, 10, "Mental"),
-            new Medicine("Olanzapine", 80, 20, "Mental"),
+                new Medicine("Metformin", 30, 30, "Physical"),
+                new Medicine("Amlodipine", 10, 20, "Physical"),
+                new Medicine("Seretide", 25, 30, "Physical"),
+                new Medicine("Lameson", 10, 8, "Physical"),
+                new Medicine("Paracetamol", 5, 10, "Physical"),
+                new Medicine("Omeprazole", 30, 40, "Physical"),
+                new Medicine("Amoksisilin", 70, 30, "Physical"),
+                new Medicine("Zypras", 60, 10, "Mental"),
+                new Medicine("Brintelix", 50, 10, "Mental"),
+                new Medicine("Olanzapine", 80, 20, "Mental"),
 
-            new Medicine("Metformin", 40, 40, "Physical"),
-            new Medicine("Amlodipine", 20, 40, "Physical"),
-            new Medicine("Seretide", 50, 50, "Physical"),
-            new Medicine("Lameson", 20, 16, "Physical"),
-            new Medicine("Paracetamol", 10, 20, "Physical"),
-            new Medicine("Omeprazole", 55, 50, "Physical"),
-            new Medicine("Amoksisilin", 80, 40, "Physical"),
-            new Medicine("Zypras", 90, 20, "Mental"),
-            new Medicine("Brintelix", 80, 20, "Mental"),
-            new Medicine("Olanzapine", 100, 30, "Mental")
+                new Medicine("Metformin", 40, 40, "Physical"),
+                new Medicine("Amlodipine", 20, 40, "Physical"),
+                new Medicine("Seretide", 50, 50, "Physical"),
+                new Medicine("Lameson", 20, 16, "Physical"),
+                new Medicine("Paracetamol", 10, 20, "Physical"),
+                new Medicine("Omeprazole", 55, 50, "Physical"),
+                new Medicine("Amoksisilin", 80, 40, "Physical"),
+                new Medicine("Zypras", 90, 20, "Mental"),
+                new Medicine("Brintelix", 80, 20, "Mental"),
+                new Medicine("Olanzapine", 100, 30, "Mental")
         };
 
         Food[] healthyFoods = {
-            new Food("Salad", 10, 90, 2),
-            new Food("Sushi", 25, 85, 15),
-            new Food("Fruit Salad", 8, 80, 5),
-            new Food("Grilled Chicken Breast", 20, 75, 10),
-            new Food("Steamed Broccoli", 5, 95, 1),
-            new Food("Oatmeal", 7, 85, 2),
-            new Food("Quinoa Bowl", 15, 80, 8),
-            new Food("Greek Yogurt", 6, 70, 2),
-            new Food("Avocado Toast", 12, 75, 5),
-            new Food("Smoothie Bowl", 10, 80, 4),
-            new Food("Vegetable Soup", 8, 85, 3),
-            new Food("Grilled Salmon", 25, 90, 15),
-            new Food("Brown Rice", 7, 70, 2),
-            new Food("Boiled Eggs", 6, 80, 2),
-            new Food("Roasted Sweet Potato", 9, 75, 3)
+                new Food("Salad", 10, 90, 2),
+                new Food("Sushi", 25, 85, 15),
+                new Food("Fruit Salad", 8, 80, 5),
+                new Food("Grilled Chicken Breast", 20, 75, 10),
+                new Food("Steamed Broccoli", 5, 95, 1),
+                new Food("Oatmeal", 7, 85, 2),
+                new Food("Quinoa Bowl", 15, 80, 8),
+                new Food("Greek Yogurt", 6, 70, 2),
+                new Food("Avocado Toast", 12, 75, 5),
+                new Food("Smoothie Bowl", 10, 80, 4),
+                new Food("Vegetable Soup", 8, 85, 3),
+                new Food("Grilled Salmon", 25, 90, 15),
+                new Food("Brown Rice", 7, 70, 2),
+                new Food("Boiled Eggs", 6, 80, 2),
+                new Food("Roasted Sweet Potato", 9, 75, 3)
         };
 
         Food[] fastFoods = {
-            new Food("Pizza", 20, 30, 10),
-            new Food("Burger", 15, 25, 5),
-            new Food("Fried Chicken", 18, 20, 8),
-            new Food("French Fries", 8, 10, 2),
-            new Food("Hot Dog", 12, 15, 4),
-            new Food("Potato Chips", 5, 8, 1),
-            new Food("Chocolate", 3, 5, 1),
-            new Food("Ice Cream", 6, 10, 2),
-            new Food("Donut", 4, 7, 1),
-            new Food("Pasta", 20, 30, 10),
-            new Food("Steak", 30, 40, 20),
-            new Food("Fried Rice", 15, 25, 7),
-            new Food("Sandwich", 12, 35, 5),
-            new Food("Nachos", 10, 15, 3),
-            new Food("Taco", 11, 20, 4)
+                new Food("Pizza", 20, 30, 10),
+                new Food("Burger", 15, 25, 5),
+                new Food("Fried Chicken", 18, 20, 8),
+                new Food("French Fries", 8, 10, 2),
+                new Food("Hot Dog", 12, 15, 4),
+                new Food("Potato Chips", 5, 8, 1),
+                new Food("Chocolate", 3, 5, 1),
+                new Food("Ice Cream", 6, 10, 2),
+                new Food("Donut", 4, 7, 1),
+                new Food("Pasta", 20, 30, 10),
+                new Food("Steak", 30, 40, 20),
+                new Food("Fried Rice", 15, 25, 7),
+                new Food("Sandwich", 12, 35, 5),
+                new Food("Nachos", 10, 15, 3),
+                new Food("Taco", 11, 20, 4)
         };
 
-        //Initialize healthy person
-        for(int i = 0; i < 10; i++){
+        // Initialize healthy person
+        for (int i = 0; i < 10; i++) {
             String name = healthyPersonNames[i];
             Person p = new Person(name);
             people.add(p);
         }
 
-        //Initialize sick person
-        for(int i = 0; i < 10; i++){
+        // Initialize sick person
+        for (int i = 0; i < 10; i++) {
             String name = sickPersonNames[i];
             String illness = illness_list[i];
             SickPerson p = new SickPerson(name, illness, medicines[i]);
@@ -95,7 +98,7 @@ public class Menu {
         // Initialize Pharmacies
         LinkedList<Medicine> usedMedicines = new LinkedList<>();
 
-        for(int i = 0; i < 2; i ++){
+        for (int i = 0; i < 2; i++) {
             int added = 0;
             Item[] itemToAdd = new Item[10];
             while (added < 10) {
@@ -107,7 +110,7 @@ public class Menu {
                     added++;
                 }
             }
-            if(i == 0){
+            if (i == 0) {
                 places.add(new Place("Pharmacy A", itemToAdd));
             } else {
                 places.add(new Place("Pharmacy B", itemToAdd));
@@ -121,20 +124,20 @@ public class Menu {
         defaultMenu();
     }
 
-    private void defaultMenu(){
+    private void defaultMenu() {
         int choice = 0;
 
-        do{
+        do {
             System.out.println("\nWelcome to Game");
             System.out.println("1. Play Game");
             System.out.println("2. Exit Game");
             System.out.print("Choice : ");
             choice = s.nextInt();
             System.out.println();
-            if(choice < 1 || choice > 2){
+            if (choice < 1 || choice > 2) {
                 System.out.println("Invalid choice");
             }
-        } while(choice < 1 || choice > 2);
+        } while (choice < 1 || choice > 2);
 
         switch (choice) {
             case 1:
@@ -147,13 +150,14 @@ public class Menu {
         }
     }
 
-
-    private void mainMenu(){
+    private void mainMenu() {
         currentPerson = people.get(r.nextInt(people.size()));
+        System.out.println("=== [System] ===");
         System.out.println("Hello, " + currentPerson.getName());
-        if(currentPerson instanceof SickPerson){
+        if (currentPerson instanceof SickPerson) {
             System.out.println("You were destined to bear the sickness : " + ((SickPerson) currentPerson).getIllness());
-            System.out.println("Medicine : " + ((SickPerson) currentPerson).getMedicine().getName() + " (" +((SickPerson) currentPerson).getMedicine().getDosage() + "mg)");
+            System.out.println("Medicine : " + ((SickPerson) currentPerson).getMedicine().getName() + " ("
+                    + ((SickPerson) currentPerson).getMedicine().getDosage() + "mg)");
         } else {
             System.out.println("You are a healthy person");
         }
@@ -161,12 +165,12 @@ public class Menu {
 
         currentPerson.showStatus();
 
-        System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n"); 
+        System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n");
         while (true) {
-            int choice = 0; 
-            System.out.println("Current Time: " + currentHour + ":00");
-            do{
-                System.out.println("\n=== Main Menu ===");
+            int choice = 0;
+            do {
+                System.out.println("=== [Main Menu] ===");
+                System.out.println("Current Time: " + currentHour + ":00");
                 System.out.println("1. Do activities");
                 System.out.println("2. Buy items");
                 System.out.println("3. Inventory");
@@ -175,11 +179,11 @@ public class Menu {
                 System.out.print("Choice : ");
                 choice = s.nextInt();
                 System.out.println();
-                if(choice < 1 || choice > 5){
+                if (choice < 1 || choice > 5) {
                     System.out.println("Invalid choice");
                 }
-            } while(choice < 1 || choice > 5);
-            
+            } while (choice < 1 || choice > 5);
+
             switch (choice) {
                 case 1:
                     doActivities();
@@ -191,49 +195,51 @@ public class Menu {
                     showInventory();
                     break;
                 case 4:
-                    System.out.println("Go to work");
+                    doWork();
                     break;
                 case 5:
                     createActivity();
                     break;
             }
-            if(currentPerson.getPhysicalHealth() > 100){
+            if (currentPerson.getPhysicalHealth() > 100) {
                 currentPerson.setPhysicalHealth(100);
             }
-            if(currentPerson.getMentalHealth() > 100){
+            if (currentPerson.getMentalHealth() > 100) {
                 currentPerson.setMentalHealth(100);
             }
-            if(currentPerson.getSpiritualHealth() > 100){
+            if (currentPerson.getSpiritualHealth() > 100) {
                 currentPerson.setSpiritualHealth(100);
             }
 
-            if(currentPerson.getPhysicalHealth() < 0){
+            if (currentPerson.getPhysicalHealth() < 0) {
                 currentPerson.setPhysicalHealth(0);
             }
-            if(currentPerson.getMentalHealth() < 0){
+            if (currentPerson.getMentalHealth() < 0) {
                 currentPerson.setMentalHealth(0);
             }
-            if(currentPerson.getSpiritualHealth() < 0){
+            if (currentPerson.getSpiritualHealth() < 0) {
                 currentPerson.setSpiritualHealth(0);
             }
 
-            currentPerson.showStatus(); 
+            currentPerson.showStatus();
 
-            if(currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100 && currentPerson.getSpiritualHealth() == 100){
+            if (currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100
+                    && currentPerson.getSpiritualHealth() == 100) {
                 System.out.println("You have achieved a balanced life! You win!");
                 defaultMenu();
-            } else if(currentPerson.getPhysicalHealth() == 0 || currentPerson.getMentalHealth() == 0 || currentPerson.getSpiritualHealth() == 0){
+            } else if (currentPerson.getPhysicalHealth() == 0 || currentPerson.getMentalHealth() == 0
+                    || currentPerson.getSpiritualHealth() == 0) {
                 System.out.println("You have lost your balance! You lose!");
                 defaultMenu();
             }
         }
     }
 
-
-    private void doActivities(){
+    private void doActivities() {
         int choice = 0;
-        do{
-            System.out.println("\n=== Activities Menu ===");
+        do {
+            System.out.println("=== [Activities Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
             System.out.println("1. Physical Activity");
             System.out.println("2. Mental Activity");
             System.out.println("3. Spiritual Activity");
@@ -241,11 +247,11 @@ public class Menu {
             System.out.println("0. Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 0 || choice > 4){
+            if (choice < 0 || choice > 4) {
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 0 || choice > 4);
+        } while (choice < 0 || choice > 4);
         switch (choice) {
             case 0:
                 return;
@@ -265,143 +271,169 @@ public class Menu {
         }
     }
 
+    private void doWork(){
+        int duration = r.nextInt(6, 9);
+        int salary = r.nextInt(10, 31);
 
-    private void PhysicalActivity(){
+        System.out.println("=== [Work] ===");
+        System.out.println("Current Time: " + currentHour + ":00");
+        System.out.println("Working..... ");
+        System.out.println();
+
+        incrementHour(duration);
+
+        System.out.println("Work done for " + duration + " hours");
+        System.out.println("Current Time: " + currentHour + ":00");
+        System.out.println("You earned $" + salary);
+        System.out.println();
+        currentPerson.setMoney(currentPerson.getMoney() + salary);
+        System.out.println();
+    }
+
+    private void PhysicalActivity() {
         int choice = 0;
         LinkedList<Activity> physicalAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Physical")){
+
+        for (int i = 0; i < currentPerson.getActivities().size(); i++) {
+            if (currentPerson.getActivities().get(i).getCategory().equals("Physical")) {
                 physicalAct.add(currentPerson.getActivities().get(i));
             }
         }
 
-        do{
-            System.out.println("\n=== Physical Activity Menu ===");
-            for(int i = 0; i < physicalAct.size(); i++){
-                System.out.println((i+1) + ". " + physicalAct.get(i).getName());
+        do {
+            System.out.println("=== [Physical Activity Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
+            for (int i = 0; i < physicalAct.size(); i++) {
+                System.out.println((i + 1) + ". " + physicalAct.get(i).getName());
             }
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 0 || choice > physicalAct.size()){
+            if (choice < 0 || choice > physicalAct.size()) {
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 0 || choice > physicalAct.size());
+        } while (choice < 0 || choice > physicalAct.size());
 
-        if(choice == 0){
+        if (choice == 0) {
             return;
         }
 
-        incrementHour(physicalAct.get(choice-1).doActivity(currentPerson));
+        incrementHour(physicalAct.get(choice - 1).doActivity(currentPerson));
     }
 
-
-    private void MentalActivity(){
+    private void MentalActivity() {
         int choice = 0;
         LinkedList<Activity> mentalAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Mental")){
+
+        for (int i = 0; i < currentPerson.getActivities().size(); i++) {
+            if (currentPerson.getActivities().get(i).getCategory().equals("Mental")) {
                 mentalAct.add(currentPerson.getActivities().get(i));
             }
         }
-        do{
-            System.out.println("Mental Activity Menu");
-            for(int i = 0; i < mentalAct.size(); i++){
-                System.out.println((i+1) + ". " + mentalAct.get(i).getName());
+        do {
+            System.out.println("=== [Mental Activity Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
+            for (int i = 0; i < mentalAct.size(); i++) {
+                System.out.println((i + 1) + ". " + mentalAct.get(i).getName());
             }
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 0 || choice > mentalAct.size()){
+            if (choice < 0 || choice > mentalAct.size()) {
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 0 || choice > mentalAct.size());
+        } while (choice < 0 || choice > mentalAct.size());
 
-        if(choice == 0){
+        if (choice == 0) {
             return;
         }
 
-        incrementHour(mentalAct.get(choice-1).doActivity(currentPerson));
+        incrementHour(mentalAct.get(choice - 1).doActivity(currentPerson));
     }
 
-
-    private void SpiritualActivity(){
+    private void SpiritualActivity() {
         int choice = 0;
         LinkedList<Activity> spritualAct = new LinkedList<>();
-        
-        for(int i = 0; i < currentPerson.getActivities().size(); i++){
-            if(currentPerson.getActivities().get(i).getCategory().equals("Spiritual")){
+
+        for (int i = 0; i < currentPerson.getActivities().size(); i++) {
+            if (currentPerson.getActivities().get(i).getCategory().equals("Spiritual")) {
                 spritualAct.add(currentPerson.getActivities().get(i));
             }
         }
-        do{
-            System.out.println("Spiritual Activity Menu");
-            for(int i = 0; i < spritualAct.size(); i++){
-                System.out.println((i+1) + ". " + spritualAct.get(i).getName());
+        do {
+            System.out.println("=== [Spiritual Activity Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
+            for (int i = 0; i < spritualAct.size(); i++) {
+                System.out.println((i + 1) + ". " + spritualAct.get(i).getName());
             }
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 0 || choice > spritualAct.size()){
+            if (choice < 0 || choice > spritualAct.size()) {
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        }while(choice < 0 || choice > spritualAct.size());
+        } while (choice < 0 || choice > spritualAct.size());
 
-        if(choice == 0){
+        if (choice == 0) {
             return;
         }
 
-        incrementHour(spritualAct.get(choice-1).doActivity(currentPerson));        
+        incrementHour(spritualAct.get(choice - 1).doActivity(currentPerson));
     }
 
-
-    private void incrementHour(int duration){
-        for(int i = 0; i < duration; i++){
+    private void incrementHour(int duration) {
+        for (int i = 0; i < duration; i++) {
             currentHour++;
-            if(currentHour > 24){
+            if (currentHour > 24) {
                 currentHour = 1;
+            }
+        }
+        if(!currentPerson.getInventory().isEmpty()){
+            for(Item i : currentPerson.getInventory()){
+                if(i instanceof Food){
+                    Food f = (Food) i;
+                    f.expire(duration);
+                }
             }
         }
     }
 
-
-    private void showPlaces(boolean isShowingPlaces){
+    private void showPlaces(boolean isShowingPlaces) {
         int choice = 0;
         while (isShowingPlaces) {
-            do{
-                System.out.println("Places Menu");
-                for(int i = 0; i < places.size(); i++){
-                    System.out.println((i+1) + ". " + places.get(i).getName());
+            do {
+                System.out.println("=== [Places Menu] ===");
+                System.out.println("Current Time: " + currentHour + ":00");
+                for (int i = 0; i < places.size(); i++) {
+                    System.out.println((i + 1) + ". " + places.get(i).getName());
                 }
                 System.out.println(0 + ". Back");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
                 System.out.println();
-                if(choice < 0 || choice > places.size()){
+                if (choice < 0 || choice > places.size()) {
                     System.out.println("Invalid choice");
                 }
 
-            } while(choice < 0 || choice > places.size());
-            
-            if(choice == 0){
+            } while (choice < 0 || choice > places.size());
+
+            if (choice == 0) {
                 return;
             }
-            showPlaceDetail(choice-1);
+            showPlaceDetail(choice - 1);
         }
     }
 
-
-    private void showPlaceDetail(int placeIndex){
+    private void showPlaceDetail(int placeIndex) {
         int choice = -1;
         Item[] items = places.get(placeIndex).getItemsToSell();
         while ((choice != 0 && choice < items.length) || choice > items.length) {
-            do{
-                System.out.println("Place Detail");
+            do {
+                System.out.println("=== [Place Detail] ===");
+                System.out.println("Current Time: " + currentHour + ":00");
                 System.out.println("Your money : $" + currentPerson.getMoney());
                 System.out.println("Name : " + places.get(placeIndex).getName());
                 System.out.println("Items : ");
@@ -410,101 +442,209 @@ public class Menu {
                 for (int i = 0; i < items.length; i++) {
                     String detail = "";
                     if (items[i] instanceof Medicine) {
-                    detail = "Dosage: " + ((Medicine) items[i]).getDosage() + "mg";
+                        detail = "Dosage: " + ((Medicine) items[i]).getDosage() + "mg";
                     } else if (items[i] instanceof Food) {
-                    detail = "Nutrition: " + ((Food) items[i]).getNutrition() + "%";
+                        detail = "Nutrition: " + ((Food) items[i]).getNutrition() + "%";
                     }
-                    System.out.printf("%-4d %-25s %-15s %-10.2f\n", (i + 1), items[i].getName(), detail, items[i].getPrice());
+                    System.out.printf("%-4d %-25s %-15s %-10.2f\n", (i + 1), items[i].getName(), detail,
+                            items[i].getPrice());
                 }
                 System.out.println("-------------------------------------------------------------");
                 System.out.println(0 + ". Back");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
                 System.out.println();
-                if(choice < 0 || choice > items.length){
+                if (choice < 0 || choice > items.length) {
                     System.out.println("Invalid choice");
                     System.out.println();
                 }
-            } while(choice < 0 || choice > items.length);
-            
-            if(choice < items.length + 1 && choice != 0){
-                items[choice-1].buy(currentPerson);
+            } while (choice < 0 || choice > items.length);
+
+            if (choice < items.length + 1 && choice != 0) {
+                items[choice - 1].buy(currentPerson);
             }
         }
-        if(choice == 0){
+        if (choice == 0) {
             showPlaces(false);
         }
     }
 
-
     private void showInventory() {
-        LinkedList<Item> medicines = new LinkedList<>();
-        LinkedList<Item> foods = new LinkedList<>(); 
+        int choice;
 
-        System.out.println("== " + currentPerson.getName() +" Inventory ==");
-
-        if(currentPerson.getInventory().isEmpty()){
+        if (currentPerson.getInventory().isEmpty()) {
+            System.out.println("=== [Inventory] ===");
             System.out.println("Inventory is empty");
             System.out.println();
             return;
         }
 
-        for(int i = 0; i < currentPerson.getInventory().size(); i++){
-            if(currentPerson.getInventory().get(i) instanceof Food){
-                foods.add(currentPerson.getInventory().get(i));
-            } else if(currentPerson.getInventory().get(i) instanceof Medicine){
-                medicines.add(currentPerson.getInventory().get(i));
+        do {
+            System.out.println("=== [Inventory] ===");
+            System.out.println("1. Show Foods");
+            System.out.println("2. Show Medicines");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            System.out.println();
+            if (choice < 0 || choice > 2) {
+                System.out.println("Invalid choice");
             }
-        }
-
-        System.out.println("=== Foods ===");
-        for(int i = 0; i < foods.size(); i++){
-            System.out.println((i+1) + ". " + foods.get(i).getName());
-        }
-        System.out.println();
-
-        System.out.println("=== Medicines ===");
-        for(int i = 0; i < medicines.size(); i++){
-            System.out.println((i+1) + ". " + medicines.get(i).getName());
-        }
-        
-        System.out.println("\n1. Use Item");
-        System.out.println("2. Sell Item");
-        System.out.println("0. Back");
-        System.out.print("Choice : ");
-        int choice = s.nextInt();
+        } while (choice < 0 || choice > 2);
 
         switch (choice) {
             case 0:
                 return;
             case 1:
-                System.out.println("Use Item");
-                System.out.print("Enter item number : ");
-                int itemNumber = s.nextInt();
-                if(itemNumber > medicines.size()){
-                    System.out.println("Item not found");
-                } else{
-                    medicines.get(itemNumber-1).use(currentPerson);
-                }
+                showFoodInventory();
                 break;
             case 2:
-                System.out.println("Sell Item");
-                System.out.print("Enter item number : ");
-                int sellItemNumber = s.nextInt();
-                if(sellItemNumber > medicines.size()){
-                    System.out.println("Item not found");
-                } else{
-                    medicines.get(sellItemNumber-1).sell(currentPerson);
-                }
+                showMedicineInventory();
                 break;
-
         }
     }
-    
 
-    private void createActivity(){
+    private void showFoodInventory() {
+        int choice;
+        LinkedList<Item> foods = new LinkedList<>();
+
+        for (int i = 0; i < currentPerson.getInventory().size(); i++) {
+            if (currentPerson.getInventory().get(i) instanceof Food) {
+                foods.add(currentPerson.getInventory().get(i));
+            }
+        }
+
+        if (foods.isEmpty()) {
+            System.out.println("Inventory is empty");
+            System.out.println();
+            return;
+        }
+
+        System.out.println("=========================== [Foods] =============================");
+        System.out.printf("%-4s %-25s %-15s %-15s\n", "No.", "Name", "Nutrition(%)", "Expiration (Hours)");
+        System.out.println("-----------------------------------------------------------------");
+        for (int i = 0; i < foods.size(); i++) {
+            Food food = (Food) foods.get(i);
+            if(food.getHoursBeforeExpired() < 0){
+                System.out.printf("%-4d %-25s %-15d %-15d\n", 
+                    (i + 1), 
+                    food.getName(), 
+                    food.getNutrition(), 
+                    "[Expired]"
+                );
+            }else{
+                System.out.printf("%-4d %-25s %-15d %-15d\n", 
+                    (i + 1), 
+                    food.getName(), 
+                    food.getNutrition(), 
+                    food.getHoursBeforeExpired()
+                );
+            }
+        }
+
+        do {
+            System.out.println("\n1. Use Item");
+            System.out.println("2. Sell Item");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            System.out.println();
+            if (choice < 0 || choice > 2) {
+                System.out.println("Invalid choice");
+                System.out.println();
+            }
+        } while (choice < 0 || choice > 2);
+        switch (choice) {
+            case 0:
+            return;
+            case 1:
+                System.out.println("Use Item");
+                System.out.print("Chosen food : ");
+                int itemNumber = s.nextInt();
+                if (itemNumber > foods.size()) {
+                    System.out.println("Item not found");
+                    System.out.println();
+                } else {
+                    foods.get(itemNumber - 1).use(currentPerson);
+                }
+            break;
+            case 2:
+                System.out.println("Sell Item");
+                System.out.print("chosen food : ");
+                int sellItemNumber = s.nextInt();
+                if (sellItemNumber > foods.size()) {
+                    System.out.println("Item not found");
+                    System.out.println();
+                } else {
+                    foods.get(sellItemNumber - 1).sell(currentPerson);
+                }
+            break;
+        }
+    }
+
+    private void showMedicineInventory() {
+        int choice;
+        LinkedList<Item> medicines = new LinkedList<>();
+        for (int i = 0; i < currentPerson.getInventory().size(); i++) {
+            if (currentPerson.getInventory().get(i) instanceof Medicine) {
+                medicines.add(currentPerson.getInventory().get(i));
+            }
+        }
+
+        System.out.println("=== [Medicines] ===");
+        for (int i = 0; i < medicines.size(); i++) {
+            System.out.println((i + 1) + ". " + medicines.get(i).getName());
+        }
+        
+        if (medicines.isEmpty()) {
+            System.out.println("Inventory is empty");
+            System.out.println();
+            return;
+        }
+
+        do {
+            System.out.println("\n1. Use Item");
+            System.out.println("2. Sell Item");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            System.out.println();
+            if (choice < 0 || choice > 2) {
+                System.out.println("Invalid choice");
+                System.out.println();
+            }
+        } while (choice < 0 || choice > 2);
+        switch (choice) {
+            case 0:
+            return;
+            case 1:
+                System.out.println("Use Item");
+                System.out.print("Chosen medicine : ");
+                int itemNumber = s.nextInt();
+                if (itemNumber > medicines.size()) {
+                    System.out.println("medicine not found");
+                    System.out.println();
+                } else {
+                    medicines.get(itemNumber - 1).use(currentPerson);
+                }
+            break;
+            case 2:
+                System.out.println("Sell Item");
+                System.out.print("chosen medicine : ");
+                int sellItemNumber = s.nextInt();
+                if (sellItemNumber > medicines.size()) {
+                    System.out.println("medicine not found");
+                    System.out.println();
+                } else {
+                    medicines.get(sellItemNumber - 1).sell(currentPerson);
+                }
+            break;
+        }
+    }
+
+    private void createActivity() {
         int choice = 0;
-        do{
+        do {
             System.out.println("Create Activity Menu");
             System.out.println("1. Create Physical Activity");
             System.out.println("2. Create Mental Activity");
@@ -512,16 +652,16 @@ public class Menu {
             System.out.println("0. Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
-            if(choice < 0 || choice > 3){
+            if (choice < 0 || choice > 3) {
                 System.out.println("Invalid choice");
             }
             System.out.println();
-        } while(choice < 0 || choice > 3);
-        
-        switch(choice){
+        } while (choice < 0 || choice > 3);
+
+        switch (choice) {
             case 0:
                 return;
-            case 1: 
+            case 1:
                 createPhysicalActivity();
                 break;
             case 2:
@@ -533,8 +673,7 @@ public class Menu {
         }
     }
 
-
-    private void createPhysicalActivity(){
+    private void createPhysicalActivity() {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
@@ -553,8 +692,7 @@ public class Menu {
         System.out.println();
     }
 
-
-    private void createMentalActivity(){
+    private void createMentalActivity() {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
@@ -573,8 +711,7 @@ public class Menu {
         System.out.println();
     }
 
-
-    private void createSpiritualActivity(){
+    private void createSpiritualActivity() {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
