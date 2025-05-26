@@ -28,7 +28,7 @@ public class Activity {
             }
         } 
 
-        System.out.println(person.getName() + " is doing the activity");
+        System.out.println(person.getName() + " is doing the activity for " + activityDuration + " hours.");
         System.out.println();
 
         person.applyEffect(physicalEffect, mentalEffect, spiritualEffect);

@@ -117,15 +117,15 @@ public class Menu {
                 }
             }
             if (i == 0) {
-                places.add(new Place("Pharmacy A", itemToAdd));
+                places.add(new Place("Pharmacy A", itemToAdd, 1));
             } else {
-                places.add(new Place("Pharmacy B", itemToAdd));
+                places.add(new Place("Pharmacy B", itemToAdd, 2));
             }
         }
 
         // Initialize Restaurants
-        places.add(new Place("Healthy Restaurant", healthyFoods));
-        places.add(new Place("Fast Food Restaurant", fastFoods));
+        places.add(new Place("Healthy Restaurant", healthyFoods, 2));
+        places.add(new Place("Fast Food Restaurant", fastFoods, 1));
 
         defaultMenu();
     }
@@ -283,7 +283,7 @@ public class Menu {
             case 0:
                 return;
             case 1:
-                incrementHour(currentPerson.getJob().doWork(currentPerson));
+                incrementHour(currentPerson.getJob().showWorkActivities(currentPerson, currentHour));
                 break;
             case 2:
                 currentPerson.getJob().createWork();
@@ -408,9 +408,16 @@ public class Menu {
             do {
                 System.out.println("=== [Places Menu] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
+                System.out.printf("%-4s %-25s %-20s\n", "No.", "Place Name", "Travel Duration (hours)");
+                System.out.println("------------------------------------------------------");
                 for (int i = 0; i < places.size(); i++) {
-                    System.out.println((i + 1) + ". " + places.get(i).getName());
+                    System.out.printf("%-4d %-25s %-20d\n", 
+                        (i + 1), 
+                        places.get(i).getName(), 
+                        places.get(i).getTravelDuration()
+                    );
                 }
+                System.out.println("------------------------------------------------------");
                 System.out.println(0 + ". Back");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
@@ -424,6 +431,7 @@ public class Menu {
             if (choice == 0) {
                 return;
             }
+
             showPlaceDetail(choice - 1);
         }
     }
@@ -431,6 +439,8 @@ public class Menu {
     private void showPlaceDetail(int placeIndex) {
         int choice = -1;
         Item[] items = places.get(placeIndex).getItemsToSell();
+        incrementHour(places.get(placeIndex).getTravelDuration());
+
         while ((choice != 0 && choice < items.length) || choice > items.length) {
             do {
                 System.out.println("=== [Place Detail] ===");
@@ -461,7 +471,7 @@ public class Menu {
                 }
             } while (choice < 0 || choice > items.length);
 
-            if (choice < items.length + 1 && choice != 0) {
+            if (choice < items.length && choice != 0) {
                 items[choice - 1].buy(currentPerson);
             }
         }
@@ -527,7 +537,7 @@ public class Menu {
         for (int i = 0; i < foods.size(); i++) {
             Food food = (Food) foods.get(i);
             if(food.getHoursBeforeExpired() < 0){
-                System.out.printf("%-4d %-25s %-15d %-15d\n", 
+                System.out.printf("%-4d %-25s %-15d %-15s\n", 
                     (i + 1), 
                     food.getName(), 
                     food.getNutrition(), 

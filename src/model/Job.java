@@ -41,55 +41,59 @@ public class Job {
                 break;
         }
     }
-
-
-    public int doWork(Person person) {
-        int choice = -1;
+    public int showWorkActivities(Person currentPerson, int currentHour){
+        boolean stillWorking = true;
         int duration = 0;
-        while (choice != 0) {
-            do {
-                System.out.println("=== [Work] ===");
-                System.out.printf("%-3s %-20s %-10s %-10s %-15s %-15s %-15s%n",
-                        "No", "Work Name", "Duration", "Salary", "Physical Effect", "Mental Effect",
-                        "Spiritual Effect");
+        while (stillWorking) {
+            int choice = -1;
+            do{
+                System.out.println("==== [Work Activities] ====");
+                System.out.println("Current Hour: " + currentHour + ":00");
+                System.out.println();
+                System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Salary", "Physical", "Mental", "Spiritual");
+                
                 for (int i = 0; i < activities.size(); i++) {
-                    Activity act = activities.get(i);
-                    System.out.printf("%-3d %-20s %-10d %-10.2f %-15d %-15d %-15d%n",
-                            (i + 1),
-                            act.getName(),
-                            act.getActivityDuration(),
-                            act.getSalary(),
-                            act.getPhysicalEffect(),
-                            act.getMentalEffect(),
-                            act.getSpiritualEffect());
+                    Activity a = activities.get(i);
+                    System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
+                        (i + 1),
+                        a.getName(),
+                        a.getActivityDuration(),
+                        a.getMoney(),
+                        a.getPhysicalEffect(),
+                        a.getMentalEffect(),
+                        a.getSpiritualEffect());
                 }
-                System.out.print("Choice : ");
+                System.out.println("0. Exit");
+                System.out.print("Choose an activity : ");
                 choice = s.nextInt();
                 System.out.println();
+
                 if (choice < 0 || choice > activities.size()) {
                     System.out.println("Invalid choice. Please try again.");
-                    System.out.println();
                 }
-            } while (choice < 0 || choice > activities.size());
+            }while(choice < 0 || choice > activities.size());
 
-            if (choice == 0) {
-                return duration;
-            }
-            Activity selectedActivity = activities.get(choice - 1);
-            duration = selectedActivity.doActivity(person);
-
-            if (duration > 0) {
-                person.setMoney(person.getMoney() + selectedActivity.getSalary());
-                System.out.println("You earned $" + selectedActivity.getSalary());
-                System.out.println();
-            } else {
-                System.out.println("You did not earn any money from this activity.");
-                System.out.println();
+            if(choice == 0){
+                if (duration < 8) {
+                    System.out.println("You can't go back because you have to work at least 8 hours");
+                } else {
+                    stillWorking = false;
+                }
+            }else{
+                Activity selectedActivity = activities.get(choice - 1);
+                duration += selectedActivity.doActivity(currentPerson);
+                
+                for (int i = 0; i < selectedActivity.getActivityDuration(); i++) {
+                    currentHour++;
+                    if (currentHour > 24) {
+                        currentHour = 1;
+                    }
+                }
             }
         }
         return duration;
     }
-
+    
     public void createWork() {
         System.out.println("==== [Create Work] ====");
         System.out.print("Enter work name: ");

@@ -10,11 +10,14 @@ public class Place {
     private int closeHour;
     private Item[] itemsToSell = new Item[10];
 
-    public Place(String name, Item[] itemsToSell) {
+    private int travelDuration;
+
+    public Place(String name, Item[] itemsToSell, int travelDuration) {
         this.name = name;
         this.openHour = r.nextInt(7, 11);
         this.closeHour = r.nextInt(20, 24);
         this.itemsToSell = itemsToSell;
+        this.travelDuration = travelDuration;
     }
     public boolean checkIfIsOpen(int currentHour){
         return currentHour <= closeHour && currentHour >= openHour;
@@ -42,5 +45,8 @@ public class Place {
     }
     public void setItemsToSell(Item[] itemsToSell) {
         this.itemsToSell = itemsToSell;
+    }
+    public int getTravelDuration() {
+        return travelDuration;
     }
 }
