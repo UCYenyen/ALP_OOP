@@ -11,11 +11,11 @@ public class Person {
 
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
-    protected Job job = null;
+    protected Job job;
     
     protected Random r = new Random();
 
-    public Person(String name) {
+    public Person(String name, Job job) {
         this.name = name;
         this.money = 50.0;
         this.physicalHealth = r.nextInt(20,41);
@@ -31,6 +31,7 @@ public class Person {
         activities.add(new Activity("Play Golf", 30, 10, -10, 150, "Physical", 3));
         activities.add(new Activity("Pray", -2, 8, 20, 0, "Spiritual", 1));
         activities.add(new Activity("Read Holy Book", -5, 10, 15, 0, "Spiritual", 1));
+        this.job = job;
     }
 
     public void showStatus() {
@@ -42,6 +43,36 @@ public class Person {
         System.out.println("Mental Health: " + mentalHealth);
         System.out.println("Spiritual Health: " + spiritualHealth);
         System.out.println();
+    }
+
+    public void applyEffect(int physicalEffect, int mentalEffect, int spiritualEffect) {
+        this.physicalHealth += physicalEffect;
+        this.mentalHealth += mentalEffect;
+        this.spiritualHealth += spiritualEffect;
+
+        if (this.physicalHealth > 100) {
+            this.physicalHealth = 100;
+        }
+        if (this.mentalHealth > 100) {
+            this.mentalHealth = 100;
+        }
+        if (this.spiritualHealth > 100) {
+            this.spiritualHealth = 100;
+        }
+
+        if (this.physicalHealth < 0) {
+            this.physicalHealth = 0;
+        }
+        if (this.mentalHealth < 0) {
+            this.mentalHealth = 0;
+        }
+        if (this.spiritualHealth < 0) {
+            this.spiritualHealth = 0;
+        }
+    }
+
+    public void addMoney(double amount) {
+        this.money += amount;
     }
 
     public String getName() {
@@ -99,9 +130,11 @@ public class Person {
     public void setActivities(LinkedList<Activity> activities) {
         this.activities = activities;
     }
+
     public Job getJob() {
         return job;
     }
+
     public void setJob(Job job) {
         this.job = job;
     }

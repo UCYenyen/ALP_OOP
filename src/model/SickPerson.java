@@ -4,8 +4,8 @@ public class SickPerson extends Person {
     private String illness;
     private Medicine medicine;
 
-    public SickPerson(String name, String illness, Medicine medicine) {
-        super(name);
+    public SickPerson(String name, Job job, String illness, Medicine medicine) {
+        super(name, job);
         this.illness = illness;
         this.medicine = medicine;
 

@@ -14,34 +14,15 @@ public class Menu {
     private int currentHour = 6;
 
     public Menu() {
-        //#region jobs
-        Job[] healthyPersonJobs = {
-            new Job("Software Engineer", r.nextInt(50, 121)),
-            new Job("Data Scientist", r.nextInt(50, 121)),
-            new Job("Doctor", r.nextInt(50, 121)),
-            new Job("Teacher", r.nextInt(50, 121)),
-            new Job("Nurse", r.nextInt(50, 121)),
-            new Job("Accountant", r.nextInt(50, 121)),
-            new Job("Chef", r.nextInt(50, 121)),
-            new Job("Graphic Designer", r.nextInt(50, 121)),
-            new Job("Salesperson", r.nextInt(50, 121)),
-            new Job("Marketing Specialist", r.nextInt(50, 121))
+        Job[] jobs = {
+            new Job("Software Engineer", 200),
+            new Job("Data Scientist", 180),
+            new Job("Doctor", 300),
+            new Job("Teacher", 150),
+            new Job("Chef", 150)
         };
-        Job[] sickPersonJobs = {
-            new Job("Unemployed", r.nextInt(50, 121)),
-            new Job("Freelancer", r.nextInt(50, 121)),
-            new Job("Part-time Worker", r.nextInt(50, 121)),
-            new Job("Consultant", r.nextInt(50, 121)),
-            new Job("Retired", r.nextInt(50, 121)),
-            new Job("Student", r.nextInt(50, 121)),
-            new Job("Intern", r.nextInt(50, 121)),
-            new Job("Volunteer", r.nextInt(50, 121)),
-            new Job("Researcher", r.nextInt(50, 121)),
-            new Job("Artist", r.nextInt(50, 121))
-        };
-
         
-        //#endregion
+        
         String[] healthyPersonNames = { "Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma",
                 "Felix" };
         String[] sickPersonNames = { "Richard", "Richardo", "Flabianos", "Rex", "Matthew", "Michael", "Julius", "Jevon",
@@ -110,18 +91,13 @@ public class Menu {
 
         // Initialize healthy person
         for (int i = 0; i < 10; i++) {
-            String name = healthyPersonNames[i];
-            Person p = new Person(name);
+            Person p = new Person(healthyPersonNames[i], jobs[r.nextInt(jobs.length)]);
             people.add(p);
-            p.setJob(healthyPersonJobs[r.nextInt(healthyPersonJobs.length)]);
         }
 
         // Initialize sick person
         for (int i = 0; i < 10; i++) {
-            String name = sickPersonNames[i];
-            String illness = illness_list[i];
-            SickPerson p = new SickPerson(name, illness, medicines[i]);
-            p.setJob(sickPersonJobs[r.nextInt(sickPersonJobs.length)]);
+            SickPerson p = new SickPerson(sickPersonNames[i], jobs[r.nextInt(jobs.length)], illness_list[i], medicines[i]);
             people.add(p);
         }
 
@@ -230,25 +206,6 @@ public class Menu {
                 case 5:
                     createActivity();
                     break;
-            }
-            if (currentPerson.getPhysicalHealth() > 100) {
-                currentPerson.setPhysicalHealth(100);
-            }
-            if (currentPerson.getMentalHealth() > 100) {
-                currentPerson.setMentalHealth(100);
-            }
-            if (currentPerson.getSpiritualHealth() > 100) {
-                currentPerson.setSpiritualHealth(100);
-            }
-
-            if (currentPerson.getPhysicalHealth() < 0) {
-                currentPerson.setPhysicalHealth(0);
-            }
-            if (currentPerson.getMentalHealth() < 0) {
-                currentPerson.setMentalHealth(0);
-            }
-            if (currentPerson.getSpiritualHealth() < 0) {
-                currentPerson.setSpiritualHealth(0);
             }
 
             currentPerson.showStatus();
