@@ -11,9 +11,10 @@ public class Menu {
     private LinkedList<Place> places = new LinkedList<>();
 
     private Person currentPerson;
-    private int currentHour = 6;
+    private int currentHour;
 
-    public Menu() {
+    public void init() {
+        currentHour = 6;
         Job[] jobs = {
             new Job("Software Engineer", 200),
             new Job("Data Scientist", 180),
@@ -21,7 +22,6 @@ public class Menu {
             new Job("Teacher", 150),
             new Job("Chef", 150)
         };
-        
         
         String[] healthyPersonNames = { "Bryan", "Obie", "Nicho", "Feli", "Clarice", "Jason", "Niki", "Life", "Dharma",
                 "Felix" };
@@ -126,33 +126,33 @@ public class Menu {
         // Initialize Restaurants
         places.add(new Place("Healthy Restaurant", healthyFoods, 2));
         places.add(new Place("Fast Food Restaurant", fastFoods, 1));
-
-        defaultMenu();
     }
 
-    private void defaultMenu() {
-        int choice = 0;
+    public void defaultMenu() {
+        while(true){
+            init();
+            int choice = 0;
+            do {
+                System.out.println("\nWelcome to Game");
+                System.out.println("1. Play Game");
+                System.out.println("2. Exit Game");
+                System.out.print("Choice : ");
+                choice = s.nextInt();
+                System.out.println();
+                if (choice < 1 || choice > 2) {
+                    System.out.println("Invalid choice");
+                }
+            } while (choice < 1 || choice > 2);
 
-        do {
-            System.out.println("\nWelcome to Game");
-            System.out.println("1. Play Game");
-            System.out.println("2. Exit Game");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            System.out.println();
-            if (choice < 1 || choice > 2) {
-                System.out.println("Invalid choice");
+            switch (choice) {
+                case 1:
+                    mainMenu();
+                    break;
+                case 2:
+                    System.out.println("Goodbye");
+                    System.exit(0);
+                    break;
             }
-        } while (choice < 1 || choice > 2);
-
-        switch (choice) {
-            case 1:
-                mainMenu();
-                break;
-            case 2:
-                System.out.println("Goodbye");
-                System.exit(0);
-                break;
         }
     }
 
@@ -195,7 +195,7 @@ public class Menu {
                     doActivities();
                     break;
                 case 2:
-                    showPlaces(true);
+                    showPlaces();
                     break;
                 case 3:
                     showInventory();
@@ -233,15 +233,16 @@ public class Menu {
             if (currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100
                     && currentPerson.getSpiritualHealth() == 100) {
                 System.out.println("You have achieved a balanced life! You win!");
-                defaultMenu();
+                return;
             } else if (currentPerson.getPhysicalHealth() == 0 || currentPerson.getMentalHealth() == 0
                     || currentPerson.getSpiritualHealth() == 0) {
                 System.out.println("You have lost your balance! You lose!");
-                defaultMenu();
+                return;
             }
         }
     }
 
+    //#region doActivity Menu 
     private void doActivities() {
         int choice = 0;
         do {
@@ -272,41 +273,7 @@ public class Menu {
                 SpiritualActivity();
                 break;
             case 4:
-                currentPerson.getActivities().get((0)).doActivity(currentPerson);
-                incrementHour(currentPerson.getActivities().get(0).getActivityDuration());
-                break;
-        }
-    }
-
-    private void printWorkMenu(){
-        int choice = 0;
-        do{
-            System.out.println("=== [Work Menu] ===");
-            System.out.println("Current Time: " + currentHour + ":00");
-            System.out.println("1. Do Work");
-            System.out.println("2. Create Work Activity");
-            System.out.println("0. Back");
-            System.out.print("Choice : ");
-            choice = s.nextInt();
-            if (choice < 0 || choice > 2) {
-                System.out.println("Invalid choice");
-            }
-            System.out.println();
-        } while (choice < 0 || choice > 2);
-
-        if(currentPerson.getJob() == null) {
-            System.out.println("You don't have a job yet. Please get a job first.");
-            return;
-        }
-
-        switch (choice) {
-            case 0:
-                return;
-            case 1:
-                incrementHour(currentPerson.getJob().showWorkActivities(currentPerson, currentHour));
-                break;
-            case 2:
-                currentPerson.getJob().createWork();
+                incrementHour(currentPerson.getActivities().get(0).doActivity(currentPerson));
                 break;
         }
     }
@@ -405,26 +372,12 @@ public class Menu {
         incrementHour(spritualAct.get(choice - 1).doActivity(currentPerson));
     }
 
-    private void incrementHour(int duration) {
-        for (int i = 0; i < duration; i++) {
-            currentHour++;
-            if (currentHour > 24) {
-                currentHour = 1;
-            }
-        }
-        if(!currentPerson.getInventory().isEmpty()){
-            for(Item i : currentPerson.getInventory()){
-                if(i instanceof Food){
-                    Food f = (Food) i;
-                    f.expire(duration);
-                }
-            }
-        }
-    }
+    //#endregion
 
-    private void showPlaces(boolean isShowingPlaces) {
+    //#region buyItems Menu
+    private void showPlaces() {
         int choice = 0;
-        while (isShowingPlaces) {
+        while (true) {
             do {
                 System.out.println("=== [Places Menu] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
@@ -496,10 +449,13 @@ public class Menu {
             }
         }
         if (choice == 0) {
-            showPlaces(false);
+            return;
         }
     }
 
+    //#endregion
+
+    //#region Inventory Menu
     private void showInventory() {
         int choice;
 
@@ -563,7 +519,7 @@ public class Menu {
                     food.getNutrition(), 
                     "[Expired]"
                 );
-            }else{
+            } else{
                 System.out.printf("%-4d %-25s %-15d %-15d\n", 
                     (i + 1), 
                     food.getName(), 
@@ -587,7 +543,7 @@ public class Menu {
         } while (choice < 0 || choice > 2);
         switch (choice) {
             case 0:
-            return;
+                return;
             case 1:
                 System.out.println("Use Item");
                 System.out.print("Chosen food : ");
@@ -647,7 +603,7 @@ public class Menu {
         } while (choice < 0 || choice > 2);
         switch (choice) {
             case 0:
-            return;
+                return;
             case 1:
                 System.out.println("Use Item");
                 System.out.print("Chosen medicine : ");
@@ -658,7 +614,7 @@ public class Menu {
                 } else {
                     medicines.get(itemNumber - 1).use(currentPerson);
                 }
-            break;
+                break;
             case 2:
                 System.out.println("Sell Item");
                 System.out.print("chosen medicine : ");
@@ -669,10 +625,47 @@ public class Menu {
                 } else {
                     medicines.get(sellItemNumber - 1).sell(currentPerson);
                 }
-            break;
+                break;
         }
     }
+    //#endregion
 
+    //#region Work Menu
+    private void printWorkMenu(){
+        int choice = 0;
+        do{
+            System.out.println("=== [Work Menu] ===");
+            System.out.println("Current Time: " + currentHour + ":00");
+            System.out.println("1. Do Work");
+            System.out.println("2. Create Work Activity");
+            System.out.println("0. Back");
+            System.out.print("Choice : ");
+            choice = s.nextInt();
+            if (choice < 0 || choice > 2) {
+                System.out.println("Invalid choice");
+            }
+            System.out.println();
+        } while (choice < 0 || choice > 2);
+
+        if(currentPerson.getJob() == null) {
+            System.out.println("You don't have a job yet. Please get a job first.");
+            return;
+        }
+
+        switch (choice) {
+            case 0:
+                return;
+            case 1:
+                incrementHour(currentPerson.getJob().showWorkActivities(currentPerson, currentHour));
+                break;
+            case 2:
+                currentPerson.getJob().createWork();
+                break;
+        }
+    }
+    //#endregion
+
+    //#region createActivity Menu
     private void createActivity() {
         int choice = 0;
         do {
@@ -760,4 +753,23 @@ public class Menu {
         currentPerson.getActivities().add(act);
         System.out.println();
     }
+    //#endregion
+    
+    private void incrementHour(int duration) {
+        for (int i = 0; i < duration; i++) {
+            currentHour++;
+            if (currentHour > 24) {
+                currentHour = 1;
+            }
+        }
+        if(!currentPerson.getInventory().isEmpty()){
+            for(Item i : currentPerson.getInventory()){
+                if(i instanceof Food){
+                    Food f = (Food) i;
+                    f.expire(duration);
+                }
+            }
+        }
+    }
 }
+
