@@ -20,8 +20,8 @@ public class Activity {
     }
     
     public int doActivity(Person person) {
-        if(money <= 0){ // Daily activity can be free or cost money
-            if(person.getMoney() < money) {
+        if(money < 0){ 
+            if((-1 * person.getMoney()) > money) {
                 System.out.println("You don't have enough money to do this activity.");
                 System.out.println();
                 return 0; // durasi aktivitas 0 jika tidak bisa dilakukan

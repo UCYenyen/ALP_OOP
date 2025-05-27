@@ -208,6 +208,26 @@ public class Menu {
                     break;
             }
 
+            if (currentPerson.getPhysicalHealth() > 100) {
+                currentPerson.setPhysicalHealth(100);
+            }
+            if (currentPerson.getMentalHealth() > 100) {
+                currentPerson.setMentalHealth(100);
+            }
+            if (currentPerson.getSpiritualHealth() > 100) {
+                currentPerson.setSpiritualHealth(100);
+            }
+
+            if (currentPerson.getPhysicalHealth() < 0) {
+                currentPerson.setPhysicalHealth(0);
+            }
+            if (currentPerson.getMentalHealth() < 0) {
+                currentPerson.setMentalHealth(0);
+            }
+            if (currentPerson.getSpiritualHealth() < 0) {
+                currentPerson.setSpiritualHealth(0);
+            }
+
             currentPerson.showStatus();
 
             if (currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100
@@ -253,7 +273,7 @@ public class Menu {
                 break;
             case 4:
                 currentPerson.getActivities().get((0)).doActivity(currentPerson);
-                currentHour = 6;
+                incrementHour(currentPerson.getActivities().get(0).getActivityDuration());
                 break;
         }
     }
@@ -578,7 +598,7 @@ public class Menu {
                 } else {
                     foods.get(itemNumber - 1).use(currentPerson);
                 }
-            break;
+                break;
             case 2:
                 System.out.println("Sell Item");
                 System.out.print("chosen food : ");
@@ -589,7 +609,7 @@ public class Menu {
                 } else {
                     foods.get(sellItemNumber - 1).sell(currentPerson);
                 }
-            break;
+                break;
         }
     }
 
@@ -688,7 +708,7 @@ public class Menu {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
-        double price = s.nextDouble();
+        double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
         System.out.print("Enter physical effect : ");
@@ -707,7 +727,7 @@ public class Menu {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
-        double price = s.nextDouble();
+        double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
         System.out.print("Enter physical effect : ");
@@ -726,7 +746,7 @@ public class Menu {
         System.out.print("Enter activity name : ");
         String name = s.next() + s.nextLine();
         System.out.print("Enter activity price : ");
-        double price = s.nextDouble();
+        double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
         System.out.print("Enter physical effect : ");

@@ -50,6 +50,8 @@ public class Job {
                 System.out.println("==== [Work Activities] ====");
                 System.out.println("Current Hour: " + currentHour + ":00");
                 System.out.println();
+                currentPerson.showStatus();
+                System.out.println();
                 System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Salary", "Physical", "Mental", "Spiritual");
                 
                 for (int i = 0; i < activities.size(); i++) {
@@ -71,7 +73,7 @@ public class Job {
                 if (choice < 0 || choice > activities.size()) {
                     System.out.println("Invalid choice. Please try again.");
                 }
-            }while(choice < 0 || choice > activities.size());
+            } while(choice < 0 || choice > activities.size());
 
             if(choice == 0){
                 if (duration < 8) {
@@ -79,7 +81,7 @@ public class Job {
                 } else {
                     stillWorking = false;
                 }
-            }else{
+            } else{
                 Activity selectedActivity = activities.get(choice - 1);
                 duration += selectedActivity.doActivity(currentPerson);
                 

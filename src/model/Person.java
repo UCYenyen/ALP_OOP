@@ -8,30 +8,29 @@ public class Person {
     protected int physicalHealth;
     protected int mentalHealth;
     protected int spiritualHealth;
-
+    protected Job job;
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
-    protected Job job;
-    
+
     protected Random r = new Random();
 
     public Person(String name, Job job) {
         this.name = name;
-        this.money = 50.0;
+        this.money = 200.0;
         this.physicalHealth = r.nextInt(20,41);
         this.mentalHealth = r.nextInt(20,41);
         this.spiritualHealth = r.nextInt(20,41);
+        this.job = job;
         activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other", r.nextInt(6,9)));
         activities.add(new Activity("Meditation", -5,15, 8, 0, "Mental", 1));
-        activities.add(new Activity("Psychologist Consultation", -10, 40, 5, 200, "Mental", 3));
+        activities.add(new Activity("Psychologist Consultation", -10, 40, 5, -200, "Mental", 3));
         activities.add(new Activity("Write Journal", -8, 10, 5, 0, "Mental", 1));
         activities.add(new Activity("Listen to Music", -10, 8, 5, 0, "Mental", 1));
         activities.add(new Activity("Aerobic Dance", 20, 10, -10, 0, "Physical", 2));
         activities.add(new Activity("Swim", 15, 10, -10, 0, "Physical", 2));
-        activities.add(new Activity("Play Golf", 30, 10, -10, 150, "Physical", 3));
+        activities.add(new Activity("Play Golf", 30, 10, -10, -150, "Physical", 3));
         activities.add(new Activity("Pray", -2, 8, 20, 0, "Spiritual", 1));
         activities.add(new Activity("Read Holy Book", -5, 10, 15, 0, "Spiritual", 1));
-        this.job = job;
     }
 
     public void showStatus() {
@@ -49,26 +48,6 @@ public class Person {
         this.physicalHealth += physicalEffect;
         this.mentalHealth += mentalEffect;
         this.spiritualHealth += spiritualEffect;
-
-        if (this.physicalHealth > 100) {
-            this.physicalHealth = 100;
-        }
-        if (this.mentalHealth > 100) {
-            this.mentalHealth = 100;
-        }
-        if (this.spiritualHealth > 100) {
-            this.spiritualHealth = 100;
-        }
-
-        if (this.physicalHealth < 0) {
-            this.physicalHealth = 0;
-        }
-        if (this.mentalHealth < 0) {
-            this.mentalHealth = 0;
-        }
-        if (this.spiritualHealth < 0) {
-            this.spiritualHealth = 0;
-        }
     }
 
     public void addMoney(double amount) {
@@ -115,6 +94,14 @@ public class Person {
         this.spiritualHealth = spiritualHealth;
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
     public LinkedList<Item> getInventory() {
         return inventory;
     }
@@ -129,13 +116,5 @@ public class Person {
 
     public void setActivities(LinkedList<Activity> activities) {
         this.activities = activities;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 }
