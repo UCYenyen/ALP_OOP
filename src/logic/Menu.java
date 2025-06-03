@@ -172,7 +172,7 @@ public class Menu {
         currentPerson.showStatus();
 
         System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n");
-        while (true) {
+        while (currentPerson.isLostBalance() == false) {
             int choice = 0;
             do {
                 System.out.println("=== [Main Menu] ===");
@@ -227,17 +227,11 @@ public class Menu {
             if (currentPerson.getSpiritualHealth() < 0) {
                 currentPerson.setSpiritualHealth(0);
             }
-
-            currentPerson.showStatus();
-
-            if (currentPerson.getPhysicalHealth() == 100 && currentPerson.getMentalHealth() == 100
-                    && currentPerson.getSpiritualHealth() == 100) {
-                System.out.println("You have achieved a balanced life! You win!");
+          
+            if(currentPerson.isLostBalance()){
                 return;
-            } else if (currentPerson.getPhysicalHealth() == 0 || currentPerson.getMentalHealth() == 0
-                    || currentPerson.getSpiritualHealth() == 0) {
-                System.out.println("You have lost your balance! You lose!");
-                return;
+            }else{
+                currentPerson.showStatus();
             }
         }
     }
@@ -291,8 +285,16 @@ public class Menu {
         do {
             System.out.println("=== [Physical Activity Menu] ===");
             System.out.println("Current Time: " + currentHour + ":00");
+            System.out.printf("%-4s %-25s %-15s %-15s %-15s\n", "No.", "Activity Name", "Physical Effect", "Mental Effect", "Spiritual Effect");
             for (int i = 0; i < physicalAct.size(); i++) {
-                System.out.println((i + 1) + ". " + physicalAct.get(i).getName());
+                Activity act = physicalAct.get(i);
+                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                    (i + 1), 
+                    act.getName(), 
+                    act.getPhysicalEffect(), 
+                    act.getMentalEffect(), 
+                    act.getSpiritualEffect()
+                );
             }
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
@@ -322,8 +324,16 @@ public class Menu {
         do {
             System.out.println("=== [Mental Activity Menu] ===");
             System.out.println("Current Time: " + currentHour + ":00");
+            System.out.printf("%-4s %-25s %-15s %-15s %-15s\n", "No.", "Activity Name", "Physical Effect", "Mental Effect", "Spiritual Effect");
             for (int i = 0; i < mentalAct.size(); i++) {
-                System.out.println((i + 1) + ". " + mentalAct.get(i).getName());
+                Activity act = mentalAct.get(i);
+                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                    (i + 1), 
+                    act.getName(), 
+                    act.getPhysicalEffect(), 
+                    act.getMentalEffect(), 
+                    act.getSpiritualEffect()
+                );
             }
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
@@ -352,10 +362,19 @@ public class Menu {
         }
         do {
             System.out.println("=== [Spiritual Activity Menu] ===");
+
             System.out.println("Current Time: " + currentHour + ":00");
             for (int i = 0; i < spritualAct.size(); i++) {
-                System.out.println((i + 1) + ". " + spritualAct.get(i).getName());
+                Activity act = spritualAct.get(i);
+                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                    (i + 1), 
+                    act.getName(), 
+                    act.getPhysicalEffect(), 
+                    act.getMentalEffect(), 
+                    act.getSpiritualEffect()
+                );
             }
+
             System.out.println(0 + ". Back");
             System.out.print("Choice : ");
             choice = s.nextInt();
@@ -381,13 +400,15 @@ public class Menu {
             do {
                 System.out.println("=== [Places Menu] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
-                System.out.printf("%-4s %-25s %-20s\n", "No.", "Place Name", "Travel Duration (hours)");
+                System.out.printf("%-4s %-25s %-20s %10s\n", "No.", "Place Name", "Travel Duration (hours)", "Status");
                 System.out.println("------------------------------------------------------");
                 for (int i = 0; i < places.size(); i++) {
-                    System.out.printf("%-4d %-25s %-20d\n", 
+                    String status = places.get(i).checkIfIsOpen(currentHour) ? " [Open]" : " [Closed]";
+                    System.out.printf("%-4d %-25s %-20d %15s\n", 
                         (i + 1), 
                         places.get(i).getName(), 
-                        places.get(i).getTravelDuration()
+                        places.get(i).getTravelDuration(),
+                        status
                     );
                 }
                 System.out.println("------------------------------------------------------");
@@ -404,8 +425,12 @@ public class Menu {
             if (choice == 0) {
                 return;
             }
-
-            showPlaceDetail(choice - 1);
+            if(places.get(choice - 1).checkIfIsOpen(currentHour) == false) {
+                System.out.println("Place is closed, please choose another place");
+                System.out.println();
+            }else{
+                showPlaceDetail(choice - 1);
+            }
         }
     }
 

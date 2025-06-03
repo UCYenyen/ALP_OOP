@@ -51,9 +51,16 @@ public class Job {
                 System.out.println("Current Hour: " + currentHour + ":00");
                 System.out.println();
                 currentPerson.showStatus();
+
+                if(currentPerson.isLostBalance()) {
+                    stillWorking = false;
+                    System.out.println("No activities available as you have lost balance.");
+                    return duration;
+                }
+
                 System.out.println();
                 System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Salary", "Physical", "Mental", "Spiritual");
-                
+
                 for (int i = 0; i < activities.size(); i++) {
                     Activity a = activities.get(i);
                     System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
@@ -74,7 +81,7 @@ public class Job {
                     System.out.println("Invalid choice. Please try again.");
                 }
             } while(choice < 0 || choice > activities.size());
-
+            
             if(choice == 0){
                 if (duration < 8) {
                     System.out.println("You can't go back because you have to work at least 8 hours");
@@ -83,6 +90,7 @@ public class Job {
                 }
             } else{
                 Activity selectedActivity = activities.get(choice - 1);
+                
                 duration += selectedActivity.doActivity(currentPerson);
                 
                 for (int i = 0; i < selectedActivity.getActivityDuration(); i++) {

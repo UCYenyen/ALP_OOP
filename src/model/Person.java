@@ -11,6 +11,7 @@ public class Person {
     protected Job job;
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
+    protected boolean lostBalance = false;
 
     protected Random r = new Random();
 
@@ -34,7 +35,7 @@ public class Person {
     }
 
     public void showStatus() {
-        System.out.println("== " + this.name + "'s Status ==");
+        System.out.println("=== " + this.name + "'s Status ===");
         System.out.println("Name: " + name);
         System.out.println("Job: " + (job != null ? job.getName() : "Unemployed"));
         System.out.println("Money: " + money);
@@ -42,6 +43,14 @@ public class Person {
         System.out.println("Mental Health: " + mentalHealth);
         System.out.println("Spiritual Health: " + spiritualHealth);
         System.out.println();
+
+        if (physicalHealth <= 0 || mentalHealth <= 0 || spiritualHealth <= 0) {
+            lostBalance = true;
+            System.out.println("You have lost your balance! You lose!");
+        }else if (physicalHealth >= 100 && mentalHealth >= 100 && spiritualHealth >= 100) {
+            lostBalance = false;
+            System.out.println("You have achieved a balanced life! You win!");
+        } 
     }
 
     public void applyEffect(int physicalEffect, int mentalEffect, int spiritualEffect) {
@@ -116,5 +125,8 @@ public class Person {
 
     public void setActivities(LinkedList<Activity> activities) {
         this.activities = activities;
+    }
+    public boolean isLostBalance() {
+        return lostBalance;
     }
 }
