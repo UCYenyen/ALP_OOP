@@ -54,7 +54,6 @@ public class Job {
 
                 if(currentPerson.isLostBalance()) {
                     stillWorking = false;
-                    System.out.println("No activities available as you have lost balance.");
                     return duration;
                 }
 
@@ -108,12 +107,33 @@ public class Job {
         System.out.println("==== [Create Work] ====");
         System.out.print("Enter work name: ");
         String workName = s.next();
-        System.out.println("Enter physical effect: ");
-        int physicalEffect = s.nextInt();
-        System.out.println("Enter mental effect: ");
-        int mentalEffect = s.nextInt();
-        System.out.println("Enter spiritual effect: ");
-        int spiritualEffect = s.nextInt();
+        int physicalEffect;
+        do {
+            System.out.print("Enter physical effect (between -20 and -10) : ");
+            physicalEffect = s.nextInt();
+            if (physicalEffect < -20 || physicalEffect > -10) {
+                System.out.println("Physical effect must be between -20 and -10");
+            }
+        } while (physicalEffect < -20 || physicalEffect > -10);
+
+        int mentalEffect;
+        do {
+            System.out.print("Enter mental effect (between -20 and -10) : ");
+            mentalEffect = s.nextInt();
+            if (mentalEffect < -20 || mentalEffect > -10) {
+                System.out.println("Mental effect must be between -20 and -10");
+            }
+        } while (mentalEffect < -20 || mentalEffect > -10);
+
+        int spiritualEffect;
+        do {
+            System.out.print("Enter spiritual effect (between -20 and -10) : ");
+            spiritualEffect = s.nextInt();
+            if (spiritualEffect < -20 || spiritualEffect > -10) {
+                System.out.println("Spiritual effect must be between -20 and -10");
+            }
+        } while (spiritualEffect < -20 || spiritualEffect > -10);
+        
         System.out.print("Enter extra money earned: ");
         double extraMoney = s.nextDouble();
         System.out.println("Enter activity duration: ");

@@ -74,6 +74,7 @@ public class Medicine extends Item {
             person.applyEffect(-1 * physicalEffect, 0, 0);
             person.getInventory().remove(this);
         }
+        person.showStatus();
     }
     
     @Override

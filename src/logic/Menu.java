@@ -149,7 +149,7 @@ public class Menu {
                     mainMenu();
                     break;
                 case 2:
-                    System.out.println("Goodbye");
+                    System.out.println("Thanks for playing!");
                     System.exit(0);
                     break;
             }
@@ -172,6 +172,7 @@ public class Menu {
         currentPerson.showStatus();
 
         System.out.println("Choose what you want to do wisely so that you have a balanced life. Good Luck! \n");
+
         while (currentPerson.isLostBalance() == false) {
             int choice = 0;
             do {
@@ -208,10 +209,12 @@ public class Menu {
                     break;
             }
 
-            if(currentPerson.isLostBalance()){
+            if (currentPerson.isLostBalance()){
                 return;
-            } else{
-                currentPerson.showStatus();
+            }
+
+            if (currentPerson.isAchievedBalance()) {
+                return;   
             }
         }
     }
@@ -248,6 +251,7 @@ public class Menu {
                 break;
             case 4:
                 incrementHour(currentPerson.getActivities().get(0).doActivity(currentPerson));
+                currentPerson.showStatus();
                 break;
         }
     }
@@ -290,6 +294,7 @@ public class Menu {
         }
 
         incrementHour(physicalAct.get(choice - 1).doActivity(currentPerson));
+        currentPerson.showStatus();
     }
 
     private void MentalActivity() {
@@ -329,6 +334,8 @@ public class Menu {
         }
 
         incrementHour(mentalAct.get(choice - 1).doActivity(currentPerson));
+        currentPerson.showStatus();
+        
     }
 
     private void SpiritualActivity() {
@@ -369,6 +376,7 @@ public class Menu {
         }
 
         incrementHour(spritualAct.get(choice - 1).doActivity(currentPerson));
+        currentPerson.showStatus();
     }
 
     //#endregion
@@ -381,7 +389,7 @@ public class Menu {
                 System.out.println("=== [Places Menu] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
                 System.out.printf("%-4s %-25s %-20s %10s\n", "No.", "Place Name", "Travel Duration (hours)", "Status");
-                System.out.println("------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------------------------");
                 for (int i = 0; i < places.size(); i++) {
                     String status = places.get(i).checkIfIsOpen(currentHour) ? " [Open]" : " [Closed]";
                     System.out.printf("%-4d %-25s %-20d %15s\n", 
@@ -391,7 +399,7 @@ public class Menu {
                         status
                     );
                 }
-                System.out.println("------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------------------------");
                 System.out.println(0 + ". Back");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
@@ -709,12 +717,32 @@ public class Menu {
         double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
-        System.out.print("Enter physical effect : ");
-        int physicalEffect = s.nextInt();
-        System.out.print("Enter mental effect : ");
-        int mentalEffect = s.nextInt();
-        System.out.print("Enter spiritual effect : ");
-        int spiritualEffect = s.nextInt();
+        int physicalEffect;
+        do {
+            System.out.print("Enter physical effect (between -20 and 20) : ");
+            physicalEffect = s.nextInt();
+            if (physicalEffect < -20 || physicalEffect > 20) {
+                System.out.println("Physical effect must be between -20 and 20");
+            }
+        } while (physicalEffect < -20 || physicalEffect > 20);
+
+        int mentalEffect;
+        do {
+            System.out.print("Enter mental effect (between -20 and 20) : ");
+            mentalEffect = s.nextInt();
+            if (mentalEffect < -20 || mentalEffect > 20) {
+                System.out.println("Mental effect must be between -20 and 20");
+            }
+        } while (mentalEffect < -20 || mentalEffect > 20);
+
+        int spiritualEffect;
+        do {
+            System.out.print("Enter spiritual effect (between -20 and 20) : ");
+            spiritualEffect = s.nextInt();
+            if (spiritualEffect < -20 || spiritualEffect > 20) {
+                System.out.println("Spiritual effect must be between -20 and 20");
+            }
+        } while (spiritualEffect < -20 || spiritualEffect > 20);
 
         Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Physical", duration);
         currentPerson.getActivities().add(act);
@@ -728,12 +756,32 @@ public class Menu {
         double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
-        System.out.print("Enter physical effect : ");
-        int physicalEffect = s.nextInt();
-        System.out.print("Enter mental effect : ");
-        int mentalEffect = s.nextInt();
-        System.out.print("Enter spiritual effect : ");
-        int spiritualEffect = s.nextInt();
+        int physicalEffect;
+        do {
+            System.out.print("Enter physical effect (between -20 and 20) : ");
+            physicalEffect = s.nextInt();
+            if (physicalEffect < -20 || physicalEffect > 20) {
+                System.out.println("Physical effect must be between -20 and 20");
+            }
+        } while (physicalEffect < -20 || physicalEffect > 20);
+
+        int mentalEffect;
+        do {
+            System.out.print("Enter mental effect (between -20 and 20) : ");
+            mentalEffect = s.nextInt();
+            if (mentalEffect < -20 || mentalEffect > 20) {
+                System.out.println("Mental effect must be between -20 and 20");
+            }
+        } while (mentalEffect < -20 || mentalEffect > 20);
+
+        int spiritualEffect;
+        do {
+            System.out.print("Enter spiritual effect (between -20 and 20) : ");
+            spiritualEffect = s.nextInt();
+            if (spiritualEffect < -20 || spiritualEffect > 20) {
+                System.out.println("Spiritual effect must be between -20 and 20");
+            }
+        } while (spiritualEffect < -20 || spiritualEffect > 20);
 
         Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Mental", duration);
         currentPerson.getActivities().add(act);
@@ -747,12 +795,32 @@ public class Menu {
         double price = s.nextDouble() * -1;
         System.out.print("Enter activity duration (in hours) : ");
         int duration = s.nextInt();
-        System.out.print("Enter physical effect : ");
-        int physicalEffect = s.nextInt();
-        System.out.print("Enter mental effect : ");
-        int mentalEffect = s.nextInt();
-        System.out.print("Enter spiritual effect : ");
-        int spiritualEffect = s.nextInt();
+        int physicalEffect;
+        do {
+            System.out.print("Enter physical effect (between -20 and 20) : ");
+            physicalEffect = s.nextInt();
+            if (physicalEffect < -20 || physicalEffect > 20) {
+                System.out.println("Physical effect must be between -20 and 20");
+            }
+        } while (physicalEffect < -20 || physicalEffect > 20);
+
+        int mentalEffect;
+        do {
+            System.out.print("Enter mental effect (between -20 and 20) : ");
+            mentalEffect = s.nextInt();
+            if (mentalEffect < -20 || mentalEffect > 20) {
+                System.out.println("Mental effect must be between -20 and 20");
+            }
+        } while (mentalEffect < -20 || mentalEffect > 20);
+
+        int spiritualEffect;
+        do {
+            System.out.print("Enter spiritual effect (between -20 and 20) : ");
+            spiritualEffect = s.nextInt();
+            if (spiritualEffect < -20 || spiritualEffect > 20) {
+                System.out.println("Spiritual effect must be between -20 and 20");
+            }
+        } while (spiritualEffect < -20 || spiritualEffect > 20);
 
         Activity act = new Activity(name, physicalEffect, mentalEffect, spiritualEffect, price, "Spiritual", duration);
         currentPerson.getActivities().add(act);

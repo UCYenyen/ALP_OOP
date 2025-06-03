@@ -9,7 +9,7 @@ public class Person {
     protected int mentalHealth;
     protected int spiritualHealth;
     protected Job job;
-    protected boolean lostBalance;
+    protected boolean lostBalance, achievedBalance;
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
     
@@ -24,6 +24,7 @@ public class Person {
         this.spiritualHealth = r.nextInt(20,41);
         this.job = job;
         this.lostBalance = false;
+        this.achievedBalance = false;
         activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other", r.nextInt(6,9)));
         activities.add(new Activity("Meditation", -5,15, 8, 0, "Mental", 1));
         activities.add(new Activity("Psychologist Consultation", -10, 40, 5, -200, "Mental", 3));
@@ -50,7 +51,7 @@ public class Person {
             lostBalance = true;
             System.out.println("You have lost your balance! You lose!");
         } else if (physicalHealth >= 100 && mentalHealth >= 100 && spiritualHealth >= 100) {
-            lostBalance = false;
+            achievedBalance = true;
             System.out.println("You have achieved a balanced life! You win!");
         } 
     }
@@ -155,5 +156,13 @@ public class Person {
 
     public void setLostBalance(boolean lostBalance) {
         this.lostBalance = lostBalance;
+    }
+
+    public boolean isAchievedBalance() {
+        return achievedBalance;
+    }
+
+    public void setAchievedBalance(boolean achievedBalance) {
+        this.achievedBalance = achievedBalance;
     }
 }

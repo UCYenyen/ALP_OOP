@@ -20,6 +20,7 @@ public abstract class Item {
         person.getInventory().remove(this);
         System.out.println("Item sold (+$" + (price * 0.8) + ")");
         System.out.println();
+        person.showStatus();
     }
 
     public String getName() {
