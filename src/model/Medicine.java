@@ -64,15 +64,14 @@ public class Medicine extends Item {
     public void use(Person person) {
         if(person instanceof SickPerson){
             if(((SickPerson) person).getMedicine() == this){
-                person.setPhysicalHealth(person.getPhysicalHealth() + physicalEffect);
-                person.setMentalHealth(person.getMentalHealth() + mentalEffect);
+                person.applyEffect(physicalEffect, mentalEffect, 0);
                 person.getInventory().remove(this);
             } else {
-                person.setPhysicalHealth(person.getPhysicalHealth() - physicalEffect);
+                person.applyEffect(-1 * physicalEffect, 0, 0);
                 person.getInventory().remove(this);
             }
         } else {
-            person.setPhysicalHealth(person.getPhysicalHealth() - physicalEffect);
+            person.applyEffect(-1 * physicalEffect, 0, 0);
             person.getInventory().remove(this);
         }
     }
@@ -80,7 +79,7 @@ public class Medicine extends Item {
     @Override
     public void buy(Person person) {
         if(person.getMoney() >= price){
-            person.setMoney(person.getMoney() - price);
+            person.addMoney(-1 * price);
             person.getInventory().add(this);
             System.out.println("Item bought (-$" + price + ")");
             System.out.println();

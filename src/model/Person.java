@@ -9,9 +9,10 @@ public class Person {
     protected int mentalHealth;
     protected int spiritualHealth;
     protected Job job;
+    protected boolean lostBalance;
     protected LinkedList<Item> inventory = new LinkedList<>();
     protected LinkedList<Activity> activities = new LinkedList<>();
-    protected boolean lostBalance = false;
+    
 
     protected Random r = new Random();
 
@@ -22,6 +23,7 @@ public class Person {
         this.mentalHealth = r.nextInt(20,41);
         this.spiritualHealth = r.nextInt(20,41);
         this.job = job;
+        this.lostBalance = false;
         activities.add(new Activity("Sleep", 10, 10, 0, 0, "Other", r.nextInt(6,9)));
         activities.add(new Activity("Meditation", -5,15, 8, 0, "Mental", 1));
         activities.add(new Activity("Psychologist Consultation", -10, 40, 5, -200, "Mental", 3));
@@ -47,16 +49,36 @@ public class Person {
         if (physicalHealth <= 0 || mentalHealth <= 0 || spiritualHealth <= 0) {
             lostBalance = true;
             System.out.println("You have lost your balance! You lose!");
-        }else if (physicalHealth >= 100 && mentalHealth >= 100 && spiritualHealth >= 100) {
+        } else if (physicalHealth >= 100 && mentalHealth >= 100 && spiritualHealth >= 100) {
             lostBalance = false;
             System.out.println("You have achieved a balanced life! You win!");
         } 
     }
 
     public void applyEffect(int physicalEffect, int mentalEffect, int spiritualEffect) {
-        this.physicalHealth += physicalEffect;
-        this.mentalHealth += mentalEffect;
-        this.spiritualHealth += spiritualEffect;
+        physicalHealth += physicalEffect;
+        mentalHealth += mentalEffect;
+        spiritualHealth += spiritualEffect;
+
+        if (physicalHealth > 100) {
+            physicalHealth = 100;
+        }
+        if (mentalHealth > 100) {
+            mentalHealth = 100;
+        }
+        if (spiritualHealth > 100) {
+            spiritualHealth = 100;
+        }
+
+        if (physicalHealth < 0) {
+            physicalHealth = 0;
+        }
+        if (mentalHealth < 0) {
+            mentalHealth= 0;
+        }
+        if (spiritualHealth < 0) {
+            spiritualHealth = 0;
+        }
     }
 
     public void addMoney(double amount) {
@@ -126,7 +148,12 @@ public class Person {
     public void setActivities(LinkedList<Activity> activities) {
         this.activities = activities;
     }
+
     public boolean isLostBalance() {
         return lostBalance;
+    }
+
+    public void setLostBalance(boolean lostBalance) {
+        this.lostBalance = lostBalance;
     }
 }

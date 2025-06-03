@@ -208,29 +208,9 @@ public class Menu {
                     break;
             }
 
-            if (currentPerson.getPhysicalHealth() > 100) {
-                currentPerson.setPhysicalHealth(100);
-            }
-            if (currentPerson.getMentalHealth() > 100) {
-                currentPerson.setMentalHealth(100);
-            }
-            if (currentPerson.getSpiritualHealth() > 100) {
-                currentPerson.setSpiritualHealth(100);
-            }
-
-            if (currentPerson.getPhysicalHealth() < 0) {
-                currentPerson.setPhysicalHealth(0);
-            }
-            if (currentPerson.getMentalHealth() < 0) {
-                currentPerson.setMentalHealth(0);
-            }
-            if (currentPerson.getSpiritualHealth() < 0) {
-                currentPerson.setSpiritualHealth(0);
-            }
-          
             if(currentPerson.isLostBalance()){
                 return;
-            }else{
+            } else{
                 currentPerson.showStatus();
             }
         }

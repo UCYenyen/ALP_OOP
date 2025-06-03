@@ -53,11 +53,10 @@ public class Food extends Item {
     @Override
     public void use(Person person) {
         if(hoursBeforeExpired >= 0){
-            person.setPhysicalHealth(person.getPhysicalHealth() + physicalEffect);
-            person.setMentalHealth(person.getMentalHealth() + mentalEffect);
+            person.applyEffect(physicalEffect, mentalEffect, 0);
             person.getInventory().remove(this);
         } else {
-            person.setPhysicalHealth(person.getPhysicalHealth() - physicalEffect);
+            person.applyEffect(-1 * physicalEffect, 0, 0);
             person.getInventory().remove(this);
         }
     }
@@ -65,7 +64,7 @@ public class Food extends Item {
     @Override
     public void buy(Person person) {
         if (person.getMoney() >= price) {
-            person.setMoney(person.getMoney() - price);
+            person.addMoney(-1 * price);
             Food itemToAdd = new Food(this.name, this.price, this.nutrition, this.hoursBeforeExpired);
             person.getInventory().add(itemToAdd);
             System.out.println("Item bought (-$" + price + ")");
