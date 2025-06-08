@@ -133,6 +133,11 @@ public class Menu {
             init();
             int choice = 0;
             do {
+                System.out.println(" _____ ___  _   _ ___ _     ___ ____  ____  ___    _    \n" + //
+                                        "| ____/ _ \\| | | |_ _| |   |_ _| __ )|  _ \\|_ _|  / \\   \n" + //
+                                        "|  _|| | | | | | || || |    | ||  _ \\| |_) || |  / _ \\  \n" + //
+                                        "| |__| |_| | |_| || || |___ | || |_) |  _ < | | / ___ \\ \n" + //
+                                        "|_____\\__\\_\\\\___/|___|_____|___|____/|_| \\_\\___/_/   \\_\\");
                 System.out.println("\nWelcome to Game");
                 System.out.println("1. Play Game");
                 System.out.println("2. Exit Game");
