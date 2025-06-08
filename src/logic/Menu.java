@@ -567,7 +567,7 @@ public class Menu {
                 System.out.print("Chosen food : ");
                 int itemNumber = s.nextInt();
                 if (itemNumber > foods.size()) {
-                    System.out.println("Item not found");
+                    System.out.println("Food not found");
                     System.out.println();
                 } else {
                     foods.get(itemNumber - 1).use(currentPerson);
@@ -575,10 +575,10 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("Sell Item");
-                System.out.print("chosen food : ");
+                System.out.print("Chosen food : ");
                 int sellItemNumber = s.nextInt();
                 if (sellItemNumber > foods.size()) {
-                    System.out.println("Item not found");
+                    System.out.println("Food not found");
                     System.out.println();
                 } else {
                     foods.get(sellItemNumber - 1).sell(currentPerson);
@@ -598,7 +598,7 @@ public class Menu {
 
         System.out.println("=== [Medicines] ===");
         for (int i = 0; i < medicines.size(); i++) {
-            System.out.println((i + 1) + ". " + medicines.get(i).getName());
+            System.out.println((i + 1) + ". " + medicines.get(i).getName() + " - " + ((Medicine) medicines.get(i)).getDosage() + "mg");
         }
         
         if (medicines.isEmpty()) {
@@ -627,7 +627,7 @@ public class Menu {
                 System.out.print("Chosen medicine : ");
                 int itemNumber = s.nextInt();
                 if (itemNumber > medicines.size()) {
-                    System.out.println("medicine not found");
+                    System.out.println("Medicine not found");
                     System.out.println();
                 } else {
                     medicines.get(itemNumber - 1).use(currentPerson);
@@ -635,10 +635,10 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("Sell Item");
-                System.out.print("chosen medicine : ");
+                System.out.print("Chosen medicine : ");
                 int sellItemNumber = s.nextInt();
                 if (sellItemNumber > medicines.size()) {
-                    System.out.println("medicine not found");
+                    System.out.println("Medicine not found");
                     System.out.println();
                 } else {
                     medicines.get(sellItemNumber - 1).sell(currentPerson);

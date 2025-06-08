@@ -35,15 +35,15 @@ public class Food extends Item {
 
         //#region Mental Effect
         if(nutrition >= 0 && nutrition <= 20) {
-            mentalEffect = 1;
+            mentalEffect = 5;
         } else if (nutrition > 20 && nutrition <= 40) {
-            mentalEffect = 2;
+            mentalEffect = 4;
         } else if (nutrition > 40 && nutrition <= 60) {
             mentalEffect = 3;
         } else if (nutrition > 60 && nutrition <= 80) {
-            mentalEffect = 4;
+            mentalEffect = 2;
         } else if (nutrition > 80 && nutrition <= 100) {
-            mentalEffect = 5;
+            mentalEffect = 1;
         }
         //#endregion
         
