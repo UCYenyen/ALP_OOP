@@ -7,8 +7,8 @@ public class Menu {
     private Scanner s = new Scanner(System.in);
     private Random r = new Random();
 
-    private LinkedList<Person> people = new LinkedList<>();
-    private LinkedList<Place> places = new LinkedList<>();
+    private ArrayList<Person> people = new ArrayList<>();
+    private ArrayList<Place> places = new ArrayList<>();
 
     private Person currentPerson;
     private int currentHour;
@@ -102,7 +102,7 @@ public class Menu {
         }
 
         // Initialize Pharmacies
-        LinkedList<Medicine> usedMedicines = new LinkedList<>();
+        ArrayList<Medicine> usedMedicines = new ArrayList<>();
 
         for (int i = 0; i < 2; i++) {
             int added = 0;
@@ -258,7 +258,7 @@ public class Menu {
 
     private void PhysicalActivity() {
         int choice = 0;
-        LinkedList<Activity> physicalAct = new LinkedList<>();
+        ArrayList<Activity> physicalAct = new ArrayList<>();
 
         for (int i = 0; i < currentPerson.getActivities().size(); i++) {
             if (currentPerson.getActivities().get(i).getCategory().equals("Physical")) {
@@ -299,7 +299,7 @@ public class Menu {
 
     private void MentalActivity() {
         int choice = 0;
-        LinkedList<Activity> mentalAct = new LinkedList<>();
+        ArrayList<Activity> mentalAct = new ArrayList<>();
 
         for (int i = 0; i < currentPerson.getActivities().size(); i++) {
             if (currentPerson.getActivities().get(i).getCategory().equals("Mental")) {
@@ -340,7 +340,7 @@ public class Menu {
 
     private void SpiritualActivity() {
         int choice = 0;
-        LinkedList<Activity> spritualAct = new LinkedList<>();
+        ArrayList<Activity> spritualAct = new ArrayList<>();
 
         for (int i = 0; i < currentPerson.getActivities().size(); i++) {
             if (currentPerson.getActivities().get(i).getCategory().equals("Spiritual")) {
@@ -506,7 +506,7 @@ public class Menu {
 
     private void showFoodInventory() {
         int choice;
-        LinkedList<Item> foods = new LinkedList<>();
+        ArrayList<Item> foods = new ArrayList<>();
 
         for (int i = 0; i < currentPerson.getInventory().size(); i++) {
             if (currentPerson.getInventory().get(i) instanceof Food) {
@@ -584,7 +584,7 @@ public class Menu {
 
     private void showMedicineInventory() {
         int choice;
-        LinkedList<Item> medicines = new LinkedList<>();
+        ArrayList<Item> medicines = new ArrayList<>();
         for (int i = 0; i < currentPerson.getInventory().size(); i++) {
             if (currentPerson.getInventory().get(i) instanceof Medicine) {
                 medicines.add(currentPerson.getInventory().get(i));

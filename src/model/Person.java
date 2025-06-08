@@ -10,8 +10,8 @@ public class Person {
     protected int spiritualHealth;
     protected Job job;
     protected boolean lostBalance, achievedBalance;
-    protected LinkedList<Item> inventory = new LinkedList<>();
-    protected LinkedList<Activity> activities = new LinkedList<>();
+    protected ArrayList<Item> inventory = new ArrayList<>();
+    protected ArrayList<Activity> activities = new ArrayList<>();
     
 
     protected Random r = new Random();
@@ -134,19 +134,19 @@ public class Person {
         this.job = job;
     }
 
-    public LinkedList<Item> getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public void setInventory(LinkedList<Item> inventory) {
+    public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
     }
 
-    public LinkedList<Activity> getActivities() {
+    public ArrayList<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(LinkedList<Activity> activities) {
+    public void setActivities(ArrayList<Activity> activities) {
         this.activities = activities;
     }
 

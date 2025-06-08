@@ -6,7 +6,7 @@ public class Job {
     private String name;
     private double salary;
 
-    private LinkedList<Activity> activities = new LinkedList<>();
+    private ArrayList<Activity> activities = new ArrayList<>();
 
     private Scanner s = new Scanner(System.in);
 
@@ -161,11 +161,11 @@ public class Job {
         this.salary = salary;
     }
 
-    public LinkedList<Activity> getActivities() {
+    public ArrayList<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(LinkedList<Activity> activities) {
+    public void setActivities(ArrayList<Activity> activities) {
         this.activities = activities;
     }
 }
