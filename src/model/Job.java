@@ -144,7 +144,7 @@ public class Job {
         } while (extraMoney < 0 || extraMoney > 100);
        
         
-        System.out.println("Enter activity duration: ");
+        System.out.print("Enter activity duration: ");
         int activityDuration = s.nextInt();
 
         Activity a = new Activity(workName, physicalEffect, mentalEffect, spiritualEffect, extraMoney, "Work", activityDuration);
