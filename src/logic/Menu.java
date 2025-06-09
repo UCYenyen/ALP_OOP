@@ -285,7 +285,7 @@ public class Menu {
                     act.getSpiritualEffect()
                 );
             }
-            System.out.println(0 + ". Back");
+            System.out.println(0 + ". Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if (choice < 0 || choice > physicalAct.size()) {
@@ -325,7 +325,7 @@ public class Menu {
                     act.getSpiritualEffect()
                 );
             }
-            System.out.println(0 + ". Back");
+            System.out.println(0 + ". Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if (choice < 0 || choice > mentalAct.size()) {
@@ -367,7 +367,7 @@ public class Menu {
                 );
             }
 
-            System.out.println(0 + ". Back");
+            System.out.println(0 + ". Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if (choice < 0 || choice > spritualAct.size()) {
@@ -674,13 +674,126 @@ public class Menu {
             case 0:
                 return;
             case 1:
-                incrementHour(currentPerson.getJob().showWorkActivities(currentPerson, currentHour));
+                incrementHour(showWorkActivities(currentPerson, currentHour));
                 break;
             case 2:
-                currentPerson.getJob().createWork();
+                createWork();
                 break;
         }
     }
+
+    public int showWorkActivities(Person currentPerson, int currentHour){
+        boolean stillWorking = true;
+        int duration = 0;
+        while (stillWorking) {
+            int choice = -1;
+            do{
+                System.out.println("==== [Work Activities] ====");
+                System.out.println("Current Hour: " + currentHour + ":00");
+                System.out.println();
+                currentPerson.showStatus();
+
+                if(currentPerson.isLostBalance()) {
+                    stillWorking = false;
+                    return duration;
+                }
+
+                System.out.println();
+                System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Salary", "Physical", "Mental", "Spiritual");
+
+                for (int i = 0; i < currentPerson.getActivities().size(); i++) {
+                    Activity a = currentPerson.getActivities().get(i);
+                    System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
+                        (i + 1),
+                        a.getName(),
+                        a.getActivityDuration(),
+                        a.getMoney(),
+                        a.getPhysicalEffect(),
+                        a.getMentalEffect(),
+                        a.getSpiritualEffect());
+                }
+                System.out.println("0. Exit");
+                System.out.print("Choose an activity : ");
+                choice = s.nextInt();
+                System.out.println();
+
+                if (choice < 0 || choice > currentPerson.getActivities().size()) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } while(choice < 0 || choice > currentPerson.getActivities().size());
+            
+            if(choice == 0){
+                if (duration < 8) {
+                    System.out.println("You can't go back because you have to work at least 8 hours");
+                } else {
+                    stillWorking = false;
+                }
+            } else{
+                Activity selectedActivity = currentPerson.getActivities().get(choice - 1);
+                
+                duration += selectedActivity.doActivity(currentPerson);
+                
+                for (int i = 0; i < selectedActivity.getActivityDuration(); i++) {
+                    currentHour++;
+                    if (currentHour > 24) {
+                        currentHour = 1;
+                    }
+                }
+            }
+        }
+        return duration;
+    }
+    
+    public void createWork() {
+        System.out.println("==== [Create Work] ====");
+        System.out.print("Enter work name: ");
+        String workName = s.next() + s.nextLine();
+        int physicalEffect;
+        do {
+            System.out.print("Enter physical effect (between -20 and -10) : ");
+            physicalEffect = s.nextInt();
+            if (physicalEffect < -20 || physicalEffect > -10) {
+                System.out.println("Physical effect must be between -20 and -10");
+            }
+        } while (physicalEffect < -20 || physicalEffect > -10);
+
+        int mentalEffect;
+        do {
+            System.out.print("Enter mental effect (between -20 and -10) : ");
+            mentalEffect = s.nextInt();
+            if (mentalEffect < -20 || mentalEffect > -10) {
+                System.out.println("Mental effect must be between -20 and -10");
+            }
+        } while (mentalEffect < -20 || mentalEffect > -10);
+
+        int spiritualEffect;
+        do {
+            System.out.print("Enter spiritual effect (between -20 and -10) : ");
+            spiritualEffect = s.nextInt();
+            if (spiritualEffect < -20 || spiritualEffect > -10) {
+                System.out.println("Spiritual effect must be between -20 and -10");
+            }
+        } while (spiritualEffect < -20 || spiritualEffect > -10);
+        double extraMoney;
+       
+        do {
+            System.out.print("Enter extra money earned: ");
+            extraMoney = s.nextDouble();
+            if (extraMoney < 0 || extraMoney > 100) {
+                System.out.println("Spiritual effect must be between 0 and 100");
+            }
+        } while (extraMoney < 0 || extraMoney > 100);
+       
+        
+        System.out.print("Enter activity duration: ");
+        int activityDuration = s.nextInt();
+
+        Activity a = new Activity(workName, physicalEffect, mentalEffect, spiritualEffect, extraMoney, "Work", activityDuration);
+        currentPerson.getJob().getActivities().add(a);
+        System.out.println("Work created successfully.");
+        System.out.println();
+    }
+
     //#endregion
 
     //#region createActivity Menu
