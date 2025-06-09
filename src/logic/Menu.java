@@ -274,12 +274,14 @@ public class Menu {
         do {
             System.out.println("=== [Physical Activity Menu] ===");
             System.out.println("Current Time: " + currentHour + ":00");
-            System.out.printf("%-4s %-25s %-15s %-15s %-15s\n", "No.", "Activity Name", "Physical Effect", "Mental Effect", "Spiritual Effect");
+            System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Price", "Physical", "Mental", "Spiritual");
             for (int i = 0; i < physicalAct.size(); i++) {
                 Activity act = physicalAct.get(i);
-                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
                     (i + 1), 
                     act.getName(), 
+                    act.getActivityDuration(),
+                    act.getMoney(),
                     act.getPhysicalEffect(), 
                     act.getMentalEffect(), 
                     act.getSpiritualEffect()
@@ -314,12 +316,14 @@ public class Menu {
         do {
             System.out.println("=== [Mental Activity Menu] ===");
             System.out.println("Current Time: " + currentHour + ":00");
-            System.out.printf("%-4s %-25s %-15s %-15s %-15s\n", "No.", "Activity Name", "Physical Effect", "Mental Effect", "Spiritual Effect");
+            System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Price", "Physical", "Mental", "Spiritual");
             for (int i = 0; i < mentalAct.size(); i++) {
                 Activity act = mentalAct.get(i);
-                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
                     (i + 1), 
                     act.getName(), 
+                    act.getActivityDuration(),
+                    act.getMoney(),
                     act.getPhysicalEffect(), 
                     act.getMentalEffect(), 
                     act.getSpiritualEffect()
@@ -356,11 +360,14 @@ public class Menu {
             System.out.println("=== [Spiritual Activity Menu] ===");
 
             System.out.println("Current Time: " + currentHour + ":00");
+            System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Price", "Physical", "Mental", "Spiritual");
             for (int i = 0; i < spritualAct.size(); i++) {
                 Activity act = spritualAct.get(i);
-                System.out.printf("%-4d %-25s %-15d %-15d %-15d\n", 
+                System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
                     (i + 1), 
                     act.getName(), 
+                    act.getActivityDuration(),
+                    act.getMoney(),
                     act.getPhysicalEffect(), 
                     act.getMentalEffect(), 
                     act.getSpiritualEffect()
