@@ -550,7 +550,7 @@ public class Menu {
         do {
             System.out.println("\n1. Use Item");
             System.out.println("2. Sell Item");
-            System.out.println("0. Back");
+            System.out.println("0. Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             System.out.println();
@@ -610,7 +610,7 @@ public class Menu {
         do {
             System.out.println("\n1. Use Item");
             System.out.println("2. Sell Item");
-            System.out.println("0. Back");
+            System.out.println("0. Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             System.out.println();
@@ -656,7 +656,7 @@ public class Menu {
             System.out.println("Current Time: " + currentHour + ":00");
             System.out.println("1. Do Work");
             System.out.println("2. Create Work Activity");
-            System.out.println("0. Back");
+            System.out.println("0. Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if (choice < 0 || choice > 2) {
@@ -794,7 +794,7 @@ public class Menu {
             System.out.println("1. Create Physical Activity");
             System.out.println("2. Create Mental Activity");
             System.out.println("3. Create Spiritual Activity");
-            System.out.println("0. Back");
+            System.out.println("0. Back to Main Menu");
             System.out.print("Choice : ");
             choice = s.nextInt();
             if (choice < 0 || choice > 3) {

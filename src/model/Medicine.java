@@ -94,15 +94,7 @@ public class Medicine extends Item {
         return dosage;
     }
 
-    public void setDosage(int dosage) {
-        this.dosage = dosage;
-    }
-
     public String getCategory() {
         return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 }

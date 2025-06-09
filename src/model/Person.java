@@ -90,79 +90,39 @@ public class Person {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getMoney() {
         return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
     }
 
     public int getPhysicalHealth() {
         return physicalHealth;
     }
 
-    public void setPhysicalHealth(int physicalHealth) {
-        this.physicalHealth = physicalHealth;
-    }
-
     public int getMentalHealth() {
         return mentalHealth;
-    }
-
-    public void setMentalHealth(int mentalHealth) {
-        this.mentalHealth = mentalHealth;
     }
 
     public int getSpiritualHealth() {
         return spiritualHealth;
     }
 
-    public void setSpiritualHealth(int spiritualHealth) {
-        this.spiritualHealth = spiritualHealth;
-    }
-
     public Job getJob() {
         return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
     public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public void setInventory(ArrayList<Item> inventory) {
-        this.inventory = inventory;
-    }
-
     public ArrayList<Activity> getActivities() {
         return activities;
-    }
-
-    public void setActivities(ArrayList<Activity> activities) {
-        this.activities = activities;
     }
 
     public boolean isLostBalance() {
         return lostBalance;
     }
 
-    public void setLostBalance(boolean lostBalance) {
-        this.lostBalance = lostBalance;
-    }
-
     public boolean isAchievedBalance() {
         return achievedBalance;
-    }
-
-    public void setAchievedBalance(boolean achievedBalance) {
-        this.achievedBalance = achievedBalance;
     }
 }

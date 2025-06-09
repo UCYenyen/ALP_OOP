@@ -84,15 +84,7 @@ public class Food extends Item {
         return nutrition;
     }
 
-    public void setNutrition(int nutrition) {
-        this.nutrition = nutrition;
-    }
-
     public int getHoursBeforeExpired() {
         return hoursBeforeExpired;
-    }
-
-    public void setHoursBeforeExpired(int hoursBeforeExpired) {
-        this.hoursBeforeExpired = hoursBeforeExpired;
     }
 }

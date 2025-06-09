@@ -26,40 +26,18 @@ public abstract class Item {
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getPhysicalEffect() {
         return physicalEffect;
     }
-
-    public void setPhysicalEffect(int physicalEffect) {
-        this.physicalEffect = physicalEffect;
-    }
-
     public int getMentalEffect() {
         return mentalEffect;
     }
 
-    public void setMentalEffect(int mentalEffect) {
-        this.mentalEffect = mentalEffect;
-    }
-
     public int getSpiritualEffect() {
         return spiritualEffect;
-    }
-
-    public void setSpiritualEffect(int spiritualEffect) {
-        this.spiritualEffect = spiritualEffect;
     }
 }
