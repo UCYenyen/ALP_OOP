@@ -51,6 +51,7 @@ public class Activity {
     public int getSpiritualEffect() {
         return spiritualEffect;
     }
+    
     public double getMoney() {
         return money;
     }
