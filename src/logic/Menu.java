@@ -7,8 +7,8 @@ public class Menu {
     private Scanner s = new Scanner(System.in);
     private Random r = new Random();
 
-    private ArrayList<Person> people = new ArrayList<>();
-    private ArrayList<Place> places = new ArrayList<>();
+    private Person[] people = new Person[20];
+    private Place[] places = new Place[4];
 
     private Person currentPerson;
     private int currentHour;
@@ -92,13 +92,14 @@ public class Menu {
         // Initialize healthy person
         for (int i = 0; i < 10; i++) {
             Person p = new Person(healthyPersonNames[i], jobs[r.nextInt(jobs.length)]);
-            people.add(p);
+            people[i] = p;
         }
 
         // Initialize sick person
         for (int i = 0; i < 10; i++) {
+            int index = i + 10;
             SickPerson p = new SickPerson(sickPersonNames[i], jobs[r.nextInt(jobs.length)], illness_list[i], medicines[i]);
-            people.add(p);
+            people[index] = p;
         }
 
         // Initialize Pharmacies
@@ -117,15 +118,15 @@ public class Menu {
                 }
             }
             if (i == 0) {
-                places.add(new Place("Pharmacy A", itemToAdd, 1));
+                places[0] = new Place("Pharmacy A", itemToAdd, 1);
             } else {
-                places.add(new Place("Pharmacy B", itemToAdd, 2));
+                places[1] = new Place("Pharmacy B", itemToAdd, 2);
             }
         }
 
         // Initialize Restaurants
-        places.add(new Place("Healthy Restaurant", healthyFoods, 2));
-        places.add(new Place("Fast Food Restaurant", fastFoods, 1));
+        places[2] = new Place("Healthy Restaurant", healthyFoods, 2);
+        places[3] = new Place("Fast Food Restaurant", fastFoods, 1);
     }
 
     public void defaultMenu() {
@@ -162,7 +163,7 @@ public class Menu {
     }
 
     private void mainMenu() {
-        currentPerson = people.get(r.nextInt(people.size()));
+        currentPerson = people[r.nextInt(people.length)];
         System.out.println("=== [System] ===");
         System.out.println("Hello, " + currentPerson.getName());
         if (currentPerson instanceof SickPerson) {
@@ -402,12 +403,12 @@ public class Menu {
                 System.out.println("Current Time: " + currentHour + ":00");
                 System.out.printf("%-4s %-25s %-20s %10s\n", "No.", "Place Name", "Travel Duration (hours)", "Status");
                 System.out.println("--------------------------------------------------------------------------------------------");
-                for (int i = 0; i < places.size(); i++) {
-                    String status = places.get(i).checkIfIsOpen(currentHour) ? " [Open]" : " [Closed]";
+                for (int i = 0; i < places.length; i++) {
+                    String status = places[i].checkIfIsOpen(currentHour) ? " [Open]" : " [Closed]";
                     System.out.printf("%-4d %-25s %-20d %15s\n", 
                         (i + 1), 
-                        places.get(i).getName(), 
-                        places.get(i).getTravelDuration(),
+                        places[i].getName(), 
+                        places[i].getTravelDuration(),
                         status
                     );
                 }
@@ -416,16 +417,16 @@ public class Menu {
                 System.out.print("Choice : ");
                 choice = s.nextInt();
                 System.out.println();
-                if (choice < 0 || choice > places.size()) {
+                if (choice < 0 || choice > places.length) {
                     System.out.println("Invalid choice");
                 }
 
-            } while (choice < 0 || choice > places.size());
+            } while (choice < 0 || choice > places.length);
 
             if (choice == 0) {
                 return;
             }
-            if(places.get(choice - 1).checkIfIsOpen(currentHour) == false) {
+            if(places[choice - 1].checkIfIsOpen(currentHour) == false) {
                 System.out.println("Place is closed, please choose another place");
                 System.out.println();
             }else{
@@ -436,15 +437,15 @@ public class Menu {
 
     private void showPlaceDetail(int placeIndex) {
         int choice = -1;
-        Item[] items = places.get(placeIndex).getItemsToSell();
-        incrementHour(places.get(placeIndex).getTravelDuration());
+        Item[] items = places[placeIndex].getItemsToSell();
+        incrementHour(places[placeIndex].getTravelDuration());
 
         while ((choice != 0 && choice < items.length) || choice > items.length) {
             do {
                 System.out.println("=== [Place Detail] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
                 System.out.println("Your money : $" + currentPerson.getMoney());
-                System.out.println("Name : " + places.get(placeIndex).getName());
+                System.out.println("Name : " + places[placeIndex].getName());
                 System.out.println("Items : ");
                 System.out.printf("%-4s %-25s %-15s %-10s\n", "No.", "Name", "Detail", "Price");
                 System.out.println("-------------------------------------------------------------");
@@ -960,4 +961,3 @@ public class Menu {
         }
     }
 }
-
