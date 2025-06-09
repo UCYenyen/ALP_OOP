@@ -674,7 +674,7 @@ public class Menu {
             case 0:
                 return;
             case 1:
-                incrementHour(showWorkActivities(currentPerson, currentHour));
+                showWorkActivities(currentPerson);
                 break;
             case 2:
                 createWork();
@@ -682,7 +682,7 @@ public class Menu {
         }
     }
 
-    public int showWorkActivities(Person currentPerson, int currentHour){
+    public void showWorkActivities(Person currentPerson){
         boolean stillWorking = true;
         int duration = 0;
         while (stillWorking) {
@@ -695,25 +695,24 @@ public class Menu {
 
                 if(currentPerson.isLostBalance()) {
                     stillWorking = false;
-                    return duration;
+                    return;
                 }
 
                 System.out.println();
                 System.out.printf("%-3s %-25s %-10s %-10s %-10s %-10s %-10s\n", "#", "Name", "Duration", "Salary", "Physical", "Mental", "Spiritual");
 
-                for (int i = 0; i < currentPerson.getActivities().size(); i++) {
-                    Activity a = currentPerson.getActivities().get(i);
+                for (int i = 0; i < currentPerson.getJob().getActivities().size(); i++) {
                     System.out.printf("%-3d %-25s %-10d %-10.2f %-10d %-10d %-10d\n",
                         (i + 1),
-                        a.getName(),
-                        a.getActivityDuration(),
-                        a.getMoney(),
-                        a.getPhysicalEffect(),
-                        a.getMentalEffect(),
-                        a.getSpiritualEffect());
+                        currentPerson.getJob().getActivities().get(i).getName(),
+                        currentPerson.getJob().getActivities().get(i).getActivityDuration(),
+                        currentPerson.getJob().getActivities().get(i).getMoney(),
+                        currentPerson.getJob().getActivities().get(i).getPhysicalEffect(),
+                        currentPerson.getJob().getActivities().get(i).getMentalEffect(),
+                        currentPerson.getJob().getActivities().get(i).getSpiritualEffect());
                 }
                 System.out.println("0. Exit");
-                System.out.print("Choose an activity : ");
+                System.out.print("Choose work activity : ");
                 choice = s.nextInt();
                 System.out.println();
 
@@ -729,19 +728,10 @@ public class Menu {
                     stillWorking = false;
                 }
             } else{
-                Activity selectedActivity = currentPerson.getActivities().get(choice - 1);
-                
-                duration += selectedActivity.doActivity(currentPerson);
-                
-                for (int i = 0; i < selectedActivity.getActivityDuration(); i++) {
-                    currentHour++;
-                    if (currentHour > 24) {
-                        currentHour = 1;
-                    }
-                }
+                duration += currentPerson.getJob().getActivities().get(choice - 1).getActivityDuration();
+                incrementHour(currentPerson.getJob().getActivities().get(choice - 1).doActivity(currentPerson));
             }
         }
-        return duration;
     }
     
     public void createWork() {
