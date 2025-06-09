@@ -106,7 +106,7 @@ public class Job {
     public void createWork() {
         System.out.println("==== [Create Work] ====");
         System.out.print("Enter work name: ");
-        String workName = s.next();
+        String workName = s.next() + s.nextLine();
         int physicalEffect;
         do {
             System.out.print("Enter physical effect (between -20 and -10) : ");
@@ -133,9 +133,17 @@ public class Job {
                 System.out.println("Spiritual effect must be between -20 and -10");
             }
         } while (spiritualEffect < -20 || spiritualEffect > -10);
+        double extraMoney;
+       
+        do {
+            System.out.print("Enter extra money earned: ");
+            extraMoney = s.nextDouble();
+            if (extraMoney < 0 || extraMoney > 100) {
+                System.out.println("Spiritual effect must be between 0 and 100");
+            }
+        } while (extraMoney < 0 || extraMoney > 100);
+       
         
-        System.out.print("Enter extra money earned: ");
-        double extraMoney = s.nextDouble();
         System.out.println("Enter activity duration: ");
         int activityDuration = s.nextInt();
 
