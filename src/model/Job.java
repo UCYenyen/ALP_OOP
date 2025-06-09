@@ -8,8 +8,6 @@ public class Job {
 
     private ArrayList<Activity> activities = new ArrayList<>();
 
-    private Scanner s = new Scanner(System.in);
-
     public Job(String name, double salary) {
         this.name = name;
         this.salary = salary;
