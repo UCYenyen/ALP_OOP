@@ -401,18 +401,23 @@ public class Menu {
             do {
                 System.out.println("=== [Places Menu] ===");
                 System.out.println("Current Time: " + currentHour + ":00");
-                System.out.printf("%-4s %-25s %-20s %10s\n", "No.", "Place Name", "Travel Duration (hours)", "Status");
-                System.out.println("--------------------------------------------------------------------------------------------");
+                System.out.printf("%-4s %-25s %-20s %-15s %-15s %-15s\n", 
+                    "No.", "Place Name", "Travel Duration", "Open Hour", "Close Hour", "Status");
+                System.out.println("-------------------------------------------------------------------------------------------");
+
                 for (int i = 0; i < places.length; i++) {
                     String status = places[i].checkIfIsOpen(currentHour) ? " [Open]" : " [Closed]";
-                    System.out.printf("%-4d %-25s %-20d %15s\n", 
+                    System.out.printf("%-4d %-25s %-20d %-15s %-15s %-15s\n", 
                         (i + 1), 
                         places[i].getName(), 
                         places[i].getTravelDuration(),
+                        places[i].getOpenHour() + ":00",
+                        places[i].getCloseHour() + ":00",
                         status
                     );
                 }
-                System.out.println("--------------------------------------------------------------------------------------------");
+                
+                System.out.println("-------------------------------------------------------------------------------------------");
                 System.out.println(0 + ". Back");
                 System.out.print("Choice : ");
                 choice = s.nextInt();
@@ -734,8 +739,9 @@ public class Menu {
                     System.out.println("You can't go back because you have to work at least 8 hours");
                 } else {
                     stillWorking = false;
+                    currentPerson.addMoney(currentPerson.getJob().getSalary());
                 }
-            } else{
+            } else {
                 duration += currentPerson.getJob().getActivities().get(choice - 1).getActivityDuration();
                 incrementHour(currentPerson.getJob().getActivities().get(choice - 1).doActivity(currentPerson));
             }
@@ -773,7 +779,7 @@ public class Menu {
             }
         } while (spiritualEffect < -20 || spiritualEffect > -10);
         double extraMoney;
-       
+    
         do {
             System.out.print("Enter extra money earned: ");
             extraMoney = s.nextDouble();
@@ -781,7 +787,7 @@ public class Menu {
                 System.out.println("Spiritual effect must be between 0 and 100");
             }
         } while (extraMoney < 0 || extraMoney > 100);
-       
+    
         
         System.out.print("Enter activity duration: ");
         int activityDuration = s.nextInt();
